@@ -1,0 +1,5 @@
+Un jar executable est présent à la racine du projet.
+Il est nécessaire de l'éxécuter dans un environnement Java 8.
+
+Vous pouvez également recompiler les source présentes dans le dossier src,
+en utilisant les librairies du dossier lib.
