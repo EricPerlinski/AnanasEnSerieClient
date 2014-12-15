@@ -1,4 +1,4 @@
-package main;
+package main.main;
 
 import urlconnec.UrlRead;
 
@@ -16,7 +16,7 @@ public class Main {
 		
 		//Creation d'un QRCode
 		SimpleQrcodeGenerator s = new SimpleQrcodeGenerator();
-		s.createQRCode("test", "url Ã  joindre", "png", 400);
+		s.createQRCode("test", "url à joindre", "png", 400);
 		System.out.println("QR fini !");
 		
 	}
