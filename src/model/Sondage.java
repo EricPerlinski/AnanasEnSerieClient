@@ -1,23 +1,25 @@
 package model;
 
-public class WebPage {
+public class Sondage {
 	private int id = -1;
 	private int nblike;
 	private int id_admin = -1;
 	private String lien;
 	
-	public WebPage() {
+	
+	
+	public Sondage() {
 		super();
 	}
 	
-	public WebPage(int newId,int newNblike,int newId_admin,String newLien){
+	public Sondage(int newId,int newNblike,int newId_admin,String newLien){
 		this.id = newId;
 		this.nblike = newNblike;
 		this.id_admin = newId_admin;
 		this.lien = newLien;
 	}
 	
-	public WebPage(int newId){
+	public Sondage(int newId){
 		this.id = newId;
 		this.nblike = 0;
 		this.id_admin = 0;
@@ -58,7 +60,7 @@ public class WebPage {
 
 	@Override
 	public String toString() {
-		return "WebPage [id=" + id + ", nblike=" + nblike + ", id_admin="
+		return "Sondage [id=" + id + ", nblike=" + nblike + ", id_admin="
 				+ id_admin + ", lien=" + lien + "]";
 	}
 
