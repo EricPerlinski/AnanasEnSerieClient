@@ -1,0 +1,16 @@
+Ce projet web permet de créer des sondages accessibles via un QR Code dans un navigateur.
+Ceux-ci sont administrables depuis un client java.
+
+Ce dépôt concerne le client Java.
+Le dépôt correspondant au serveur est disponnible à l'adresse suivante :
+https://bitbucket.org/telecomnancy/codingweek_prj11-server
+
+Fonctionnalités RELEASE_DAY_1 :
+
+- Créer un QR Code contenant le mot "test".
+
+Fichiers liés :
+
+- INSTALL permet de spécifier comment installer le projet.
+- Un fichier du dépôt serveur indique les tâches restantes, et donne des indicateurs projet.
+- contributors.txt contient la liste des membres ayqnt participé à ce projet.
