@@ -1,5 +1,7 @@
 package view;
 
+import helpers.ReadPropertyFile;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -16,6 +18,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import urlconnec.UrlReadWrite;
+
+import model.Sondage;
 
 public class AppSwing extends JFrame {
 
@@ -77,11 +83,25 @@ public class AppSwing extends JFrame {
 				int result = jop.showConfirmDialog(null, myPanel, "Formulaire", JOptionPane.OK_CANCEL_OPTION);
 
 				if (result == JOptionPane.OK_OPTION) {
-					client.getQRCode().setURL("/falsh/ID");
+					
+					Sondage s = new Sondage();
+					s.setTitre(question.getText());
+					
+					String url = null;
+					try{
+						url = new ReadPropertyFile().getUrl();
+						System.out.println(url);
+					}catch(Exception ex){
+						ex.printStackTrace();
+					}
+					UrlReadWrite u = new UrlReadWrite(url+"index.php/api/admin/add");
+					u.registerOnline(s);
+					
+					client.getQRCode().setURL(url+"index.php/flash/"+s.getPath());
 					client.setFile(client.getQRCode().createQRCode(imageName.getText(), "png", Integer.parseInt(imageSize.getText())));
 					client.updateGraphics();
 					
-					admin.getQRCode().setURL("klfdklmfksdlfskflmskdlfmsdklmgkdmgklkdmgksmkdslm");
+					admin.getQRCode().setURL(url+"index.php/admin/get/"+s.getPathAdmin());
 					admin.setFile(admin.getQRCode().createQRCode(imageName.getText() + "_admin", "png", Integer.parseInt(imageSize.getText())));
 					admin.updateGraphics();
 					
