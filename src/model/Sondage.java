@@ -41,8 +41,8 @@ public class Sondage {
 		return nblike;
 	}
 
-	public void setNblike(int nblike) {
-		this.nblike = nblike;
+	public void setNblike(int newNbLike) {
+		this.nblike = newNbLike;
 	}
 
 
@@ -51,8 +51,8 @@ public class Sondage {
 		return lien;
 	}
 
-	public void setLien(String lien) {
-		this.lien = lien;
+	public void setLien(String newLien) {
+		this.lien = newLien;
 	}
 
 	@Override
@@ -69,16 +69,24 @@ public class Sondage {
 		return titre;
 	}
 
-	public void setTitre(String titre) {
-		this.titre = titre;
+	public void setTitre(String newTitre) {
+		this.titre = newTitre;
 	}
 
 	public String getPath() {
 		return path;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setPath(String newPath) {
+		this.path = newPath;
+	}
+	
+	public String getPathAdmin() {
+		return pathAdmin;
+	}
+
+	public void setPathAdmin(String newPathAdmin) {
+		this.pathAdmin = newPathAdmin;
 	}
 	
 	
