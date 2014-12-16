@@ -34,12 +34,12 @@ public class UrlReadWrite {
 
 
 
-	public String getWebPage(){
+	public String getWebPage(String addUrl){
 		String inputLine = null;
 		StringBuffer buff = new StringBuffer();
 		
 		try{
-			conn = (HttpURLConnection) new URL(url).openConnection();
+			conn = (HttpURLConnection) new URL(url+addUrl).openConnection();
 			conn.setReadTimeout(10000);
 			conn.setConnectTimeout(15000);
 			conn.setRequestMethod("POST");
@@ -122,8 +122,70 @@ public class UrlReadWrite {
 
 
 	}
+	
+	public void updateSondage(Sondage sondage) {
+		StringBuffer res = null;
+		String addUrl = "api/admin/get/"+sondage.getPathAdmin();
+		try{
+			conn = (HttpURLConnection) new URL(url+addUrl).openConnection();
+			conn.setReadTimeout(10000);
+			conn.setConnectTimeout(15000);
+			conn.setRequestMethod("POST");
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+
+			List<NameValuePair> paramHttp = new ArrayList<NameValuePair>();				
+
+			paramHttp.add(new NameValuePair("titre",sondage.getTitre()));
+
+			OutputStream os = conn.getOutputStream();
+			BufferedWriter writer = new BufferedWriter(
+					new OutputStreamWriter(os, "UTF-8"));
+			writer.write(getQuery(paramHttp));
+			writer.flush();
+			writer.close();
+			os.close();
+			
+			InputStream inputStream = conn.getInputStream();
+			if(conn.getResponseCode() == HttpURLConnection.HTTP_OK && inputStream != null) {
+				InputStreamReader reader = new InputStreamReader(inputStream);
+				BufferedReader br = new BufferedReader(reader);
+				String line;
+				res = new StringBuffer();
+				while((line=br.readLine())!=null){
+					res.append(line);
+				}
+				reader.close();
+				br.close();
+				
+			}else if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){
+				System.out.println("404");
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		System.out.println("String à parser : "+res);
+		
+		JSONParser parser = new JSONParser();
+		                
+		try{
+			Object obj= parser.parse(res.toString());
+		  	JSONArray array=(JSONArray)obj;
+		  	JSONObject obj2=(JSONObject)array.get(0);
+		  	sondage.setNblike(Integer.parseInt(obj2.get("counter").toString()));
+		}catch(ParseException pe){
+			System.out.println("position: " + pe.getPosition());
+			System.out.println(pe);
+		}
+		
 
 
+	}
+
+
+	
 
 
 	private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException{
