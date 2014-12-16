@@ -76,9 +76,7 @@ public class UrlReadWrite {
 			writer.flush();
 			writer.close();
 			os.close();
-
-
-
+			
 			InputStream inputStream = conn.getInputStream();
 			if(conn.getResponseCode() == HttpURLConnection.HTTP_OK && inputStream != null) {
 				InputStreamReader reader = new InputStreamReader(inputStream);
@@ -90,7 +88,7 @@ public class UrlReadWrite {
 				}
 				reader.close();
 				br.close();
-
+				
 			}else if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){
 				System.out.println("404");
 			}
@@ -98,6 +96,8 @@ public class UrlReadWrite {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
+		
 		return res.toString();
 
 

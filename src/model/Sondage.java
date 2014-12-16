@@ -1,11 +1,16 @@
 package model;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 
 
 public class Sondage {
-	private int id = -1;
+	private String id = "-1";
 	private int nblike = 0;
-	private int id_admin = -1;
+	private String id_admin = "-1";
 	private String titre;
 	private String lien;
 	
@@ -15,19 +20,29 @@ public class Sondage {
 		super();
 	}
 	
-	public Sondage(int newId,int newNblike,int newId_admin,String newLien){
+	public Sondage(String newId,int newNblike,String newId_admin,String newLien){
 		this.id = newId;
 		this.nblike = newNblike;
 		this.id_admin = newId_admin;
 		this.lien = newLien;
 	}
 	
-	public Sondage parseJson(String json){
+	public void parseJson(String s){
 		
-		/* TODO : trouver une API pour parser le JSON */
-		Sondage s = new Sondage();
-			
-		return s;
+		System.out.println("String à parser : "+s);
+		
+		JSONParser parser = new JSONParser();
+		                
+		try{
+			Object obj= parser.parse(s);
+		  	JSONArray array=(JSONArray)obj;
+		  	JSONObject obj2=(JSONObject)array.get(0);
+		  	this.id = obj2.get("path").toString();
+		  	this.id_admin = obj2.get("pathAdmin").toString();
+		}catch(ParseException pe){
+			System.out.println("position: " + pe.getPosition());
+			System.out.println(pe);
+		}
 	}
 	
 	
@@ -35,11 +50,11 @@ public class Sondage {
 		titre = newTitre;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -51,11 +66,11 @@ public class Sondage {
 		this.nblike = nblike;
 	}
 
-	public int getId_admin() {
+	public String getId_admin() {
 		return id_admin;
 	}
 
-	public void setId_admin(int id_admin) {
+	public void setId_admin(String id_admin) {
 		this.id_admin = id_admin;
 	}
 
