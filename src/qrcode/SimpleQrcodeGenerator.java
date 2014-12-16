@@ -20,8 +20,10 @@ import com.google.zxing.qrcode.encoder.QRCode;
 
 
 public class SimpleQrcodeGenerator {
+	
+	private String url = "";
 
-	public void createQRCode(String name, String message, String imageFormat, int size){
+	public File createQRCode(String name, String imageFormat, int size){
 
 		// encode
 		ByteMatrix byteMatrix = null;
@@ -29,22 +31,23 @@ public class SimpleQrcodeGenerator {
 		try {
 			String outputFileName = name + "." + imageFormat;
 			byteMatrix = generateMatrix(name, level);
-			writeImage(outputFileName, imageFormat, byteMatrix, size);
+			File f = writeImage(outputFileName, imageFormat, byteMatrix, size);
+			return f;
 		} catch (WriterException e) {
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
-			e.printStackTrace();
+			return null;
 		}
 	}
 
-	private static ByteMatrix generateMatrix(String data, ErrorCorrectionLevel level) throws WriterException {
-		final QRCode qr = new QRCode();
+	private ByteMatrix generateMatrix(String data, ErrorCorrectionLevel level) throws WriterException {
+		QRCode qr = new QRCode();
 		Encoder.encode(data, level, qr);
-		final ByteMatrix matrix = qr.getMatrix();
+		ByteMatrix matrix = qr.getMatrix();
 		return matrix;
 	}
 
-	private static void writeImage(String outputFileName, String imageFormat, ByteMatrix matrix, final int size) throws IOException {
+	private File writeImage(String outputFileName, String imageFormat, ByteMatrix matrix, final int size) throws IOException {
 
 		// Java 2D Traitement de Area
 		// Futurs modules
@@ -109,6 +112,13 @@ public class SimpleQrcodeGenerator {
 		f.setWritable(true);
 		ImageIO.write(im, imageFormat, f);
 		f.createNewFile();
+		
+		return f;
+	}
+
+	public void setURL(String url) {
+		this.url = url;
+		
 	}
 
 }
