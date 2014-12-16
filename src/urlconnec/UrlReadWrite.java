@@ -67,7 +67,7 @@ public class UrlReadWrite {
 
 			List<NameValuePair> paramHttp = new ArrayList<NameValuePair>();				
 
-			paramHttp.add(new NameValuePair("t",sondage.getTitre()));
+			paramHttp.add(new NameValuePair("titre",sondage.getTitre()));
 
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(

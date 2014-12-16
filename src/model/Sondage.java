@@ -1,9 +1,12 @@
 package model;
 
+
+
 public class Sondage {
 	private int id = -1;
-	private int nblike;
+	private int nblike = 0;
 	private int id_admin = -1;
+	private String titre;
 	private String lien;
 	
 	
@@ -19,11 +22,17 @@ public class Sondage {
 		this.lien = newLien;
 	}
 	
-	public Sondage(int newId){
-		this.id = newId;
-		this.nblike = 0;
-		this.id_admin = 0;
-		this.lien = "";
+	public Sondage parseJson(String json){
+		
+		/* TODO : trouver une API pour parser le JSON */
+		Sondage s = new Sondage();
+			
+		return s;
+	}
+	
+	
+	public Sondage(String newTitre){
+		titre = newTitre;
 	}
 
 	public int getId() {
@@ -64,6 +73,17 @@ public class Sondage {
 				+ id_admin + ", lien=" + lien + "]";
 	}
 
+	public String toParamsTitre() {
+		return "?titre="+titre;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 	
 	
 }

@@ -1,4 +1,4 @@
-package main.main;
+package qrcode;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
