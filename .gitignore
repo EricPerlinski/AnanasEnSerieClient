@@ -4,4 +4,4 @@
 bin
 *~*
 #journal.org#
-serveur.properties
+server.properties
