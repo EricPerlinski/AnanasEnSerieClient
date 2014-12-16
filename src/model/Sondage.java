@@ -22,12 +22,7 @@ public class Sondage {
 		this.pathAdmin = newPathAdmin;
 		this.lien = newLien;
 	}
-	
-	public void parseJson(String s){
-		
-		
-	}
-	
+
 	
 	public Sondage(String newTitre,String newLien){
 		titre = newTitre;
