@@ -85,7 +85,7 @@ public class Sondage {
 	@Override
 	public String toString() {
 		return "Sondage [id=" + id + ", nblike=" + nblike + ", id_admin="
-				+ id_admin + ", lien=" + lien + "]";
+				+ id_admin + ", lien=" + lien + ", titre=" + titre + "]";
 	}
 
 	public String toParamsTitre() {

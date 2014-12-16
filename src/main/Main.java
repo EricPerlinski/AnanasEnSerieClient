@@ -18,7 +18,7 @@ public class Main {
 		s.parseJson(u.registerOnline(s));
 		System.out.println(s.toString());
 		SimpleQrcodeGenerator qr = new SimpleQrcodeGenerator();
-		qr.createQRCode("test", s.getId(), "png", 400);
+		qr.createQRCode(s.getTitre(), s.getId(), "png", 400);
 		System.out.println("QR fini !");
 		
 		
