@@ -4,5 +4,5 @@ Il est nécessaire de l'éxécuter dans un environnement Java 8.
 Vous pouvez également recompiler les source présentes dans le dossier src,
 en utilisant les librairies du dossier lib.
 
-Dans tous les cas, vous devez créer une copie du fichier config/server.properties nommée config/server.properties.template .
+Dans tous les cas, vous devez créer une copie du fichier config/server.properties.template nommée config/server.properties .
 Vous devez ensuite renseigner les paramètres de ce fichier.
