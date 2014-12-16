@@ -30,7 +30,8 @@ public class SimpleQrcodeGenerator {
 		ErrorCorrectionLevel level = ErrorCorrectionLevel.H;
 		try {
 			String outputFileName = name + "." + imageFormat;
-			byteMatrix = generateMatrix(name, level);
+			System.out.println(url);
+			byteMatrix = generateMatrix(url, level);
 			File f = writeImage(outputFileName, imageFormat, byteMatrix, size);
 			return f;
 		} catch (WriterException e) {
@@ -119,6 +120,10 @@ public class SimpleQrcodeGenerator {
 	public void setURL(String url) {
 		this.url = url;
 		
+	}
+
+	public String getURL() {
+		return url;
 	}
 
 }

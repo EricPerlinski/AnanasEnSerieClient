@@ -22,12 +22,12 @@ public class Main {
 		UrlReadWrite u = new UrlReadWrite(url+"index.php/api/admin/add");
 		/*System.out.println(u.getWebPage());
 		 */
-		Sondage s = new Sondage("titretest");
+		/*Sondage s = new Sondage("titretest");
 		s.parseJson(u.registerOnline(s));
 		System.out.println(s.toString());
 		SimpleQrcodeGenerator qr = new SimpleQrcodeGenerator();
 		qr.createQRCode(s.getTitre(), "png", 400);
-		System.out.println("QR fini !");
+		System.out.println("QR fini !");*/
 		
 		
 	}
