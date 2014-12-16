@@ -14,7 +14,7 @@ public class ReadPropertyFile {
 	
 	public String getUrl() throws IOException{
 		
-		FileReader file = new FileReader("src/main/server.properties");
+		FileReader file = new FileReader("config/server.properties");
 		Scanner sc = new Scanner(file); 
 		sc.useDelimiter("$^");
 		String texte = sc.next(); 
