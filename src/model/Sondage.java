@@ -1,16 +1,12 @@
 package model;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 
 
 public class Sondage {
-	private String id = "-1";
+	private String path = "-1";
 	private int nblike = 0;
-	private String id_admin = "-1";
+	private String pathAdmin = "-1";
 	private String titre;
 	private String lien;
 	
@@ -20,43 +16,26 @@ public class Sondage {
 		super();
 	}
 	
-	public Sondage(String newId,int newNblike,String newId_admin,String newLien){
-		this.id = newId;
+	public Sondage(String newPath,int newNblike,String newPathAdmin,String newLien){
+		this.setPath(newPath);
 		this.nblike = newNblike;
-		this.id_admin = newId_admin;
+		this.pathAdmin = newPathAdmin;
 		this.lien = newLien;
 	}
 	
 	public void parseJson(String s){
 		
-		System.out.println("String à parser : "+s);
 		
-		JSONParser parser = new JSONParser();
-		                
-		try{
-			Object obj= parser.parse(s);
-		  	JSONArray array=(JSONArray)obj;
-		  	JSONObject obj2=(JSONObject)array.get(0);
-		  	this.id = obj2.get("path").toString();
-		  	this.id_admin = obj2.get("pathAdmin").toString();
-		}catch(ParseException pe){
-			System.out.println("position: " + pe.getPosition());
-			System.out.println(pe);
-		}
 	}
 	
 	
-	public Sondage(String newTitre){
+	public Sondage(String newTitre,String newLien){
 		titre = newTitre;
+		lien = newLien;
+		
+		
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public int getNblike() {
 		return nblike;
@@ -66,13 +45,7 @@ public class Sondage {
 		this.nblike = nblike;
 	}
 
-	public String getId_admin() {
-		return id_admin;
-	}
 
-	public void setId_admin(String id_admin) {
-		this.id_admin = id_admin;
-	}
 
 	public String getLien() {
 		return lien;
@@ -84,8 +57,8 @@ public class Sondage {
 
 	@Override
 	public String toString() {
-		return "Sondage [id=" + id + ", nblike=" + nblike + ", id_admin="
-				+ id_admin + ", lien=" + lien + ", titre=" + titre + "]";
+		return "Sondage [path=" + path + ", nblike=" + nblike + ", pathAdmin="
+				+ pathAdmin + ", lien=" + lien + ", titre=" + titre + "]";
 	}
 
 	public String toParamsTitre() {
@@ -98,6 +71,14 @@ public class Sondage {
 
 	public void setTitre(String titre) {
 		this.titre = titre;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
 	
