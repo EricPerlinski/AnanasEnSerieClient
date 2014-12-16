@@ -10,6 +10,11 @@ public class NameValuePair {
 		value = newValue;
 	}
 
+	public NameValuePair(){
+		name = null;
+		value = null;
+	}
+	
 	public String getName(){
 		return name;
 	}
