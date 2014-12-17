@@ -1,7 +1,28 @@
 package model;
 
-public class YesNo {
-
+public class YesNo extends QRCode{
+	
+	private String question;
+	
+	public YesNo(){
+		question=null;
+	}
+	
+	public void setQuestion(String q){
+		question=q;
+	}
+	
+	public String toJson(){
+		String jsonSuper = super.toJson();
+		StringBuffer json=new StringBuffer();
+		
+		json.append("{");
+		json.append(jsonSuper+" , ");
+		json.append("\"question\" : "+question);
+		json.append("}");
+		
+		return json.toString();
+	}
 	
 	
 }
