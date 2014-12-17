@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="model.Sondage" project="codingweek_prj11-client" 
-    file="/codingweek_prj11-client/src/model/Sondage.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="model.QRCode" project="codingweek_prj11-client" 
+    file="/codingweek_prj11-client/src/model/QRCode.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="561" y="243"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -56,12 +56,12 @@
     </display>  
   </class>  
   <dependency id="7">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="8">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="8">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
   </dependency>  
   <dependency id="9">    
     <end type="SOURCE" refId="5"/>    
@@ -70,10 +70,6 @@
   <dependency id="10">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="1"/>  
-  </dependency>  
-  <dependency id="11">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="2"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
