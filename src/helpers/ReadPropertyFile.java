@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 public class ReadPropertyFile {
 	
 	
-	public String getUrl() throws IOException{
+	public static String getUrl() throws IOException{
 		
 		FileReader file = new FileReader("config/server.properties");
 		Scanner sc = new Scanner(file); 

@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+
 
 import urlconnec.UrlReadWrite;
 
@@ -25,6 +25,10 @@ import model.Sondage;
 
 public class AppSwing extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton creator;
 	QRCodeView client = new QRCodeView();
 	QRCodeView admin = new QRCodeView();
@@ -89,7 +93,7 @@ public class AppSwing extends JFrame {
 					
 					String url = null;
 					try{
-						url = new ReadPropertyFile().getUrl();
+						url = ReadPropertyFile.getUrl();
 						System.out.println(url);
 					}catch(Exception ex){
 						ex.printStackTrace();

@@ -63,7 +63,7 @@ public class UrlReadWrite {
 	public void registerOnline(Sondage sondage) {
 		StringBuffer res = null;
 		try{
-			conn = (HttpURLConnection) new URL(url).openConnection();
+			conn = (HttpURLConnection) new URL(url+"index.php/api/admin/add").openConnection();
 			conn.setReadTimeout(10000);
 			conn.setConnectTimeout(15000);
 			conn.setRequestMethod("POST");
@@ -122,6 +122,57 @@ public class UrlReadWrite {
 
 
 	}
+	
+	
+	public boolean testConnection(){
+		StringBuffer res = null;
+		try{
+			conn = (HttpURLConnection) new URL(url+"index.php/api/test").openConnection();
+			conn.setReadTimeout(10000);
+			conn.setConnectTimeout(15000);
+			conn.setRequestMethod("GET");
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+
+			InputStream inputStream = conn.getInputStream();
+			if(conn.getResponseCode() == HttpURLConnection.HTTP_OK && inputStream != null) {
+				InputStreamReader reader = new InputStreamReader(inputStream);
+				BufferedReader br = new BufferedReader(reader);
+				String line;
+				res = new StringBuffer();
+				while((line=br.readLine())!=null){
+					res.append(line);
+				}
+				reader.close();
+				br.close();
+				
+			}else if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){
+				System.out.println("404");
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return res.toString().equalsIgnoreCase("ananas");
+			
+		
+		
+
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public void updateSondage(Sondage sondage) {
 		StringBuffer res = null;
