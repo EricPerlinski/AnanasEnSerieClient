@@ -24,6 +24,7 @@ import javax.swing.UIManager;
 import model.Like;
 import model.QRCode;
 import model.Redirect;
+import model.Survey;
 import model.YesNo;
 import urlconnec.UrlReadWrite;
 
@@ -138,7 +139,7 @@ public class AppSwing extends JFrame {
 						break;
 					case 3:
 						System.out.println("Sondage");
-						qr=new QRCode();
+						qr=new Survey();
 						break;
 					}
 
