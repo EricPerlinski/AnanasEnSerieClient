@@ -18,7 +18,7 @@ public class YesNo extends QRCode{
 		
 		json.append("{");
 		json.append(jsonSuper+" , ");
-		json.append("\"question\" : "+question);
+		json.append("\"question\" : \""+question+"\"");
 		json.append("}");
 		
 		return json.toString();
