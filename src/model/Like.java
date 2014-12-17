@@ -5,6 +5,7 @@ public class Like extends QRCode{
 	public int nbLike;
 
 	public Like(){
+		this.setLien("/api/admin/add/like");
 		nbLike=0;
 	}
 

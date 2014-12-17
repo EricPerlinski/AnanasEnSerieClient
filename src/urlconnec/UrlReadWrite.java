@@ -63,7 +63,8 @@ public class UrlReadWrite {
 	public void registerOnline(QRCode sondage) {
 		StringBuffer res = null;
 		try{
-			conn = (HttpURLConnection) new URL(url+"index.php/api/admin/add").openConnection();
+			System.out.println(url+"index.php"+sondage.getLien());
+			conn = (HttpURLConnection) new URL(url+"index.php"+sondage.getLien()).openConnection();
 			conn.setReadTimeout(10000);
 			conn.setConnectTimeout(15000);
 			conn.setRequestMethod("POST");
@@ -72,7 +73,7 @@ public class UrlReadWrite {
 
 			List<NameValuePair> paramHttp = new ArrayList<NameValuePair>();				
 
-			paramHttp.add(new NameValuePair("title",sondage.getTitre()));
+			paramHttp.add(new NameValuePair("objet",sondage.toJson()));
 
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(
