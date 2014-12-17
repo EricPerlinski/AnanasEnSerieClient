@@ -158,7 +158,7 @@ public class AppSwing extends JFrame {
 						u.registerOnline(qr);
 
 
-						client.getQRCode().setURL(url+"index.php/flash/"+qr.getPath());
+						client.getQRCode().setURL(url+"index.php/"+qr.getPath());
 						admin.getQRCode().setURL(url+"index.php/admin/get/"+qr.getPathAdmin());
 
 
