@@ -72,15 +72,11 @@ public class AppSwing extends JFrame {
 
 		final JTextField question = new JTextField(30);
 		final JComboBox<String> type = new JComboBox<String>();
-		type.addItem("Oui/Non");
+		
 		type.addItem("Like");
 		type.addItem("Redirection");
-		type.addItem("Sondage");
-		
-		DefaultListSelectionModel model = new DefaultListSelectionModel();
-		model.addSelectionInterval(1,2);
-		EnabledJComboBoxRenderer enableRenderer = new EnabledJComboBoxRenderer(model);
-		type.setRenderer(enableRenderer);
+		//type.addItem("Oui/Non");
+		//type.addItem("Sondage");
 		
 
 		final JTextField imageSize = new JTextField();
@@ -113,6 +109,21 @@ public class AppSwing extends JFrame {
 					JOptionPane pane = new JOptionPane();
 					switch(type.getSelectedIndex()){
 					case 0:
+						qr=new Like();
+						break;
+					case 1:
+						RedirectJPanel RedirectPanel = new RedirectJPanel();
+						UIManager.put("OptionPane.cancelButtonText", "Annuler");
+						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
+						result = JOptionPane.showConfirmDialog(null,RedirectPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
+						if(result == JOptionPane.OK_OPTION){
+							System.out.println("ok");
+							qr=new Redirect();
+							System.out.println(RedirectPanel.getUrlField());
+							((Redirect)qr).setUrl(RedirectPanel.getUrlField());
+						}
+						break;
+					case 2:
 						YesNoJPanel YNPanel = new YesNoJPanel();
 						YNPanel = new YesNoJPanel();
 						UIManager.put("OptionPane.cancelButtonText", "Annuler");
@@ -123,21 +134,6 @@ public class AppSwing extends JFrame {
 							qr=new YesNo();
 							System.out.println(YNPanel.getNameQuestion());
 							((YesNo)qr).setQuestion(YNPanel.getNameQuestion());
-						}
-						break;
-					case 1:
-						qr=new Like();
-						break;
-					case 2:
-						RedirectJPanel RedirectPanel = new RedirectJPanel();
-						UIManager.put("OptionPane.cancelButtonText", "Annuler");
-						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
-						result = JOptionPane.showConfirmDialog(null,RedirectPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
-						if(result == JOptionPane.OK_OPTION){
-							System.out.println("ok");
-							qr=new Redirect();
-							System.out.println(RedirectPanel.getUrlField());
-							((Redirect)qr).setUrl(RedirectPanel.getUrlField());
 						}
 						break;
 					case 3:
