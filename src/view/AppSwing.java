@@ -2,26 +2,27 @@ package view;
 
 import helpers.ReadPropertyFile;
 
+import urlconnec.UrlReadWrite;
+
+import model.Sondage;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-
-
-import urlconnec.UrlReadWrite;
-
-import model.Sondage;
 
 public class AppSwing extends JFrame {
 
@@ -37,7 +38,7 @@ public class AppSwing extends JFrame {
 
 	public AppSwing(){
 		try {UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");}catch (Exception e) {}
-
+		
 		this.setTitle("Allez vient, on créé des QRCode pour le fun !");
 		this.setMinimumSize(new Dimension(900, 500));
 		this.setLayout(new BorderLayout());
@@ -66,15 +67,15 @@ public class AppSwing extends JFrame {
 		creator = new JButton("Créer un QRCode");
 
 		final JTextField question = new JTextField(30);
-		final JTextField imageName = new JTextField();
+
 		final JTextField imageSize = new JTextField();
 		final JPanel myPanel = new JPanel();
 		BoxLayout gl = new BoxLayout(myPanel, BoxLayout.Y_AXIS);
 		myPanel.setLayout(gl);
 		myPanel.add(new JLabel("Titre affiché pour le QrCode : "));
 		myPanel.add(question);
-		myPanel.add(new JLabel("Nom du fichier utilisé pour stocker le QrCode: "));
-		myPanel.add(imageName);
+		
+		
 		myPanel.add(new JLabel("Taille (pixels) : "));
 		imageSize.setText("250");
 		myPanel.add(imageSize);
@@ -86,7 +87,7 @@ public class AppSwing extends JFrame {
 				jop.setSize(new Dimension(100, 50));
 				UIManager.put("OptionPane.cancelButtonText", "Annuler");
 				UIManager.put("OptionPane.okButtonText", "Sauvegarder, flasher !");
-				int result = jop.showConfirmDialog(null, myPanel, "Formulaire", JOptionPane.OK_CANCEL_OPTION);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, "Formulaire", JOptionPane.OK_CANCEL_OPTION);
 
 				if (result == JOptionPane.OK_OPTION) {
 					
@@ -103,6 +104,35 @@ public class AppSwing extends JFrame {
 					UrlReadWrite u = new UrlReadWrite(url);
 					u.registerOnline(s);
 					
+					
+					client.getQRCode().setURL(url+"index.php/flash/"+s.getPath());
+					admin.getQRCode().setURL(url+"index.php/admin/get/"+s.getPathAdmin());
+					
+					
+					JFileChooser chooser = new JFileChooser();
+					chooser.setCurrentDirectory(new File("."));
+					int retrival = chooser.showSaveDialog(null);
+					if (retrival == JFileChooser.APPROVE_OPTION) {
+						try {
+							String filename = null;
+							String str = chooser.getSelectedFile().getPath();
+							if(str.charAt(str.length()-4) == '.' && str.charAt(str.length()-3) == 'p' && str.charAt(str.length()-2) == 'n' && str.charAt(str.length()-1) == 'g'){
+								filename = str.substring(0, str.length()-4);
+							}else{
+								filename = str;
+							}
+							client.setFile(client.getQRCode().createQRCode(filename, "png", Integer.parseInt(imageSize.getText())));
+							client.updateGraphics();
+							
+							
+							admin.setFile(admin.getQRCode().createQRCode(filename+ "_admin", "png", Integer.parseInt(imageSize.getText())));
+							admin.updateGraphics();
+							
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+					/*
 					client.getQRCode().setURL(url+"index.php/flash/"+s.getPath());
 					client.setFile(client.getQRCode().createQRCode(imageName.getText(), "png", Integer.parseInt(imageSize.getText())));
 					client.updateGraphics();
@@ -110,6 +140,7 @@ public class AppSwing extends JFrame {
 					admin.getQRCode().setURL(url+"index.php/admin/get/"+s.getPathAdmin());
 					admin.setFile(admin.getQRCode().createQRCode(imageName.getText() + "_admin", "png", Integer.parseInt(imageSize.getText())));
 					admin.updateGraphics();
+					*/
 					
 				}
 			}
