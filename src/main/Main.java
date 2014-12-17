@@ -5,6 +5,7 @@ import helpers.ReadPropertyFile;
 import qrcode.SimpleQrcodeGenerator;
 import model.QRCode;
 import urlconnec.UrlReadWrite;
+import view.AppSwing;
 
 
 
@@ -17,13 +18,20 @@ public class Main {
 		 */
 		String url = null;
 		try{
-			url = new ReadPropertyFile().getUrl();
+			url = ReadPropertyFile.getUrl();
 			System.out.println(url);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		UrlReadWrite u = new UrlReadWrite(url+"index.php/api/admin/add");
+		
+		UrlReadWrite u = new UrlReadWrite(url);
+		if(!u.testConnection()){
+			return;
+		}
+		
+		new AppSwing();
+		
 		/*System.out.println(u.getWebPage());
 		 */
 		/*Sondage s = new Sondage("titretest");

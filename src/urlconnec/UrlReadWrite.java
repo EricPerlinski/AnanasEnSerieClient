@@ -63,7 +63,7 @@ public class UrlReadWrite {
 	public void registerOnline(QRCode sondage) {
 		StringBuffer res = null;
 		try{
-			conn = (HttpURLConnection) new URL(url).openConnection();
+			conn = (HttpURLConnection) new URL(url+"index.php/api/admin/add").openConnection();
 			conn.setReadTimeout(10000);
 			conn.setConnectTimeout(15000);
 			conn.setRequestMethod("POST");
@@ -123,9 +123,60 @@ public class UrlReadWrite {
 
 	}
 	
-	public void updateSondage(QRCode sondage) {
+	
+	public boolean testConnection(){
 		StringBuffer res = null;
-		String addUrl = "api/admin/get/"+sondage.getPathAdmin();
+		try{
+			conn = (HttpURLConnection) new URL(url+"index.php/api/test").openConnection();
+			conn.setReadTimeout(10000);
+			conn.setConnectTimeout(15000);
+			conn.setRequestMethod("GET");
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+
+			InputStream inputStream = conn.getInputStream();
+			if(conn.getResponseCode() == HttpURLConnection.HTTP_OK && inputStream != null) {
+				InputStreamReader reader = new InputStreamReader(inputStream);
+				BufferedReader br = new BufferedReader(reader);
+				String line;
+				res = new StringBuffer();
+				while((line=br.readLine())!=null){
+					res.append(line);
+				}
+				reader.close();
+				br.close();
+				
+			}else if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){
+				System.out.println("404");
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return res.toString().equalsIgnoreCase("ananas");
+			
+		
+		
+
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void updateSondage(QRCode qr) {
+		StringBuffer res = null;
+		String addUrl = "api/admin/get/"+qr.getPathAdmin();
 		try{
 			conn = (HttpURLConnection) new URL(url+addUrl).openConnection();
 			conn.setReadTimeout(10000);
@@ -136,7 +187,7 @@ public class UrlReadWrite {
 
 			List<NameValuePair> paramHttp = new ArrayList<NameValuePair>();				
 
-			paramHttp.add(new NameValuePair("title",sondage.getTitre()));
+			paramHttp.add(new NameValuePair("title",qr.getTitre()));
 
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(
@@ -174,7 +225,7 @@ public class UrlReadWrite {
 			Object obj= parser.parse(res.toString());
 		  	JSONArray array=(JSONArray)obj;
 		  	JSONObject obj2=(JSONObject)array.get(0);
-		  	sondage.setNblke(Integer.parseInt(obj2.get("counter").toString()));
+		  	qr.setNblke(Integer.parseInt(obj2.get("counter").toString()));
 		}catch(ParseException pe){
 			System.out.println("position: " + pe.getPosition());
 			System.out.println(pe);
