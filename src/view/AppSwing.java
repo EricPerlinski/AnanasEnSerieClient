@@ -11,6 +11,7 @@ import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -76,6 +77,10 @@ public class AppSwing extends JFrame {
 		type.addItem("Redirection");
 		type.addItem("Sondage");
 		
+		DefaultListSelectionModel model = new DefaultListSelectionModel();
+		model.addSelectionInterval(1,2);
+		EnabledJComboBoxRenderer enableRenderer = new EnabledJComboBoxRenderer(model);
+		type.setRenderer(enableRenderer);
 		
 
 		final JTextField imageSize = new JTextField();
