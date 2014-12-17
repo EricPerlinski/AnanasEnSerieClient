@@ -32,6 +32,8 @@ public class AppSwing extends JFrame {
 	private JButton creator;
 	QRCodeView client = new QRCodeView();
 	QRCodeView admin = new QRCodeView();
+	
+	
 
 	public AppSwing(){
 		try {UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");}catch (Exception e) {}
@@ -69,9 +71,9 @@ public class AppSwing extends JFrame {
 		final JPanel myPanel = new JPanel();
 		BoxLayout gl = new BoxLayout(myPanel, BoxLayout.Y_AXIS);
 		myPanel.setLayout(gl);
-		myPanel.add(new JLabel("Votre question : "));
+		myPanel.add(new JLabel("Titre affiché pour le QrCode : "));
 		myPanel.add(question);
-		myPanel.add(new JLabel("Nom du QRCode : "));
+		myPanel.add(new JLabel("Nom du fichier utilisé pour stocker le QrCode: "));
 		myPanel.add(imageName);
 		myPanel.add(new JLabel("Taille (pixels) : "));
 		imageSize.setText("250");
@@ -98,7 +100,7 @@ public class AppSwing extends JFrame {
 					}catch(Exception ex){
 						ex.printStackTrace();
 					}
-					UrlReadWrite u = new UrlReadWrite(url+"index.php/api/admin/add");
+					UrlReadWrite u = new UrlReadWrite(url);
 					u.registerOnline(s);
 					
 					client.getQRCode().setURL(url+"index.php/flash/"+s.getPath());
@@ -113,10 +115,6 @@ public class AppSwing extends JFrame {
 			}
 		});
 		return creator;
-	}
-
-	public static void main(String args[]){
-		AppSwing app = new AppSwing();
 	}
 
 }

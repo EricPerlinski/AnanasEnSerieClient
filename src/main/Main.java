@@ -2,6 +2,7 @@ package main;
 
 import helpers.ReadPropertyFile;
 import urlconnec.UrlReadWrite;
+import view.AppSwing;
 
 
 
@@ -25,6 +26,9 @@ public class Main {
 		if(!u.testConnection()){
 			return;
 		}
+		
+		new AppSwing();
+		
 		/*System.out.println(u.getWebPage());
 		 */
 		/*Sondage s = new Sondage("titretest");
