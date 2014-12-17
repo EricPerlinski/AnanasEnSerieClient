@@ -76,6 +76,8 @@ public class AppSwing extends JFrame {
 		type.addItem("Like");
 		type.addItem("Redirection");
 		type.addItem("Sondage");
+		
+		
 
 		final JTextField imageSize = new JTextField();
 		final JPanel myPanel = new JPanel();
@@ -108,7 +110,6 @@ public class AppSwing extends JFrame {
 					switch(type.getSelectedIndex()){
 					case 0:
 						YesNoJPanel YNPanel = new YesNoJPanel();
-						System.out.println("Oui/Non");
 						YNPanel = new YesNoJPanel();
 						UIManager.put("OptionPane.cancelButtonText", "Annuler");
 						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
@@ -121,11 +122,9 @@ public class AppSwing extends JFrame {
 						}
 						break;
 					case 1:
-						System.out.println("Like");
 						qr=new Like();
 						break;
 					case 2:
-						System.out.println("Redirection");
 						RedirectJPanel RedirectPanel = new RedirectJPanel();
 						UIManager.put("OptionPane.cancelButtonText", "Annuler");
 						UIManager.put("OptionPane.okButtonText", "Sauvegarder");

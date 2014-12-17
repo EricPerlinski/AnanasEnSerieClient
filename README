@@ -12,6 +12,15 @@ Fonctionnalités RELEASE_DAY_2 :
 - Créer un QR Code admin permetant de voir les statistiques de son sondage directement.
 
 
+Fonctionnalités additionnelles de la RELEASE_DAY_3 : 
+
+- Possibilité de créer différents types de QR Codes, 
+     - Possibilité de créer un QR Code de type "like" permettant d'incrémenter un compteur
+     - Possibilité de créer un QR Code de type "Redirection" permettant d'incrémenter un compteur et de rediriger vers une autre page web.
+- Refactoring de l'architecture du logiciel.
+- Ajout d'un test de connection au serveur. 
+- Verifie si le serveur utilise correctement l'API Web.
+
 Fichiers liés :
 
 - INSTALL permet de spécifier comment installer le projet.
