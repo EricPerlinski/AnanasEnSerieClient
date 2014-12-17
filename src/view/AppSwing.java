@@ -21,7 +21,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import urlconnec.UrlReadWrite;
 
-import model.Sondage;
+import model.QRCode;
 
 public class AppSwing extends JFrame {
 
@@ -84,7 +84,7 @@ public class AppSwing extends JFrame {
 
 				if (result == JOptionPane.OK_OPTION) {
 					
-					Sondage s = new Sondage();
+					QRCode s = new QRCode();
 					s.setTitre(question.getText());
 					
 					String url = null;

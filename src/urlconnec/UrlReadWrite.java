@@ -18,7 +18,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import model.Sondage;
+import model.QRCode;
 
 public class UrlReadWrite {
 
@@ -60,7 +60,7 @@ public class UrlReadWrite {
 	}
 
 
-	public void registerOnline(Sondage sondage) {
+	public void registerOnline(QRCode sondage) {
 		StringBuffer res = null;
 		try{
 			conn = (HttpURLConnection) new URL(url).openConnection();
@@ -123,7 +123,7 @@ public class UrlReadWrite {
 
 	}
 	
-	public void updateSondage(Sondage sondage) {
+	public void updateSondage(QRCode sondage) {
 		StringBuffer res = null;
 		String addUrl = "api/admin/get/"+sondage.getPathAdmin();
 		try{
@@ -174,7 +174,7 @@ public class UrlReadWrite {
 			Object obj= parser.parse(res.toString());
 		  	JSONArray array=(JSONArray)obj;
 		  	JSONObject obj2=(JSONObject)array.get(0);
-		  	sondage.setNblike(Integer.parseInt(obj2.get("counter").toString()));
+		  	sondage.setNblke(Integer.parseInt(obj2.get("counter").toString()));
 		}catch(ParseException pe){
 			System.out.println("position: " + pe.getPosition());
 			System.out.println(pe);

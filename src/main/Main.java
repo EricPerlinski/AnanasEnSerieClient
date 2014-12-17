@@ -3,7 +3,7 @@ package main;
 import helpers.ReadPropertyFile;
 
 import qrcode.SimpleQrcodeGenerator;
-import model.Sondage;
+import model.QRCode;
 import urlconnec.UrlReadWrite;
 
 
