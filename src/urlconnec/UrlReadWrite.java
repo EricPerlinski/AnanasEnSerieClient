@@ -103,10 +103,6 @@ public class UrlReadWrite {
 		}
 		
 		
-
-
-		System.out.println("String à parser : "+res);
-		
 		JSONParser parser = new JSONParser();
 		                
 		try{
@@ -133,7 +129,7 @@ public class UrlReadWrite {
 			conn.setRequestMethod("GET");
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
-
+			
 			InputStream inputStream = conn.getInputStream();
 			if(conn.getResponseCode() == HttpURLConnection.HTTP_OK && inputStream != null) {
 				InputStreamReader reader = new InputStreamReader(inputStream);
@@ -151,11 +147,14 @@ public class UrlReadWrite {
 			}
 
 		}catch(Exception e){
-			e.printStackTrace();
+			System.out.println("Le serveur n'est pas disponible, veuillez vérifier l'adresse fournie dans le fichier /config/server.properties");
 		}
 		
-		return res.toString().equalsIgnoreCase("ananas");
-			
+		if(! (res == null)){
+			return res.toString().equalsIgnoreCase("ananas");
+		}else{
+			return false;
+		}
 		
 		
 

@@ -20,7 +20,6 @@ public class ReadPropertyFile {
 		String texte = sc.next(); 
 		sc.close(); 
 		
-		System.out.println("URL Serveur :" + texte);
 		
 		JSONParser parser = new JSONParser();
         String urlparse = null;

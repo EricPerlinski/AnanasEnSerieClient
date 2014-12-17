@@ -19,7 +19,6 @@ public class Main {
 		String url = null;
 		try{
 			url = ReadPropertyFile.getUrl();
-			System.out.println(url);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

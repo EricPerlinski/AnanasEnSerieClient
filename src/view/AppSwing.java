@@ -93,6 +93,7 @@ public class AppSwing extends JFrame {
 					QRCode s = new QRCode();
 					s.setTitre(question.getText());
 					
+					
 					String url = null;
 					try{
 						url = ReadPropertyFile.getUrl();
@@ -108,6 +109,8 @@ public class AppSwing extends JFrame {
 					admin.getQRCode().setURL(url+"index.php/admin/get/"+s.getPathAdmin());
 					
 					
+					
+					/* File Chooser pour le nom des QRCodes */ 
 					JFileChooser chooser = new JFileChooser();
 					chooser.setCurrentDirectory(new File("."));
 					int retrival = chooser.showSaveDialog(null);
