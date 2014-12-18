@@ -1,9 +1,6 @@
 package main;
 
 import helpers.ReadPropertyFile;
-
-import qrcode.SimpleQrcodeGenerator;
-import model.QRCode;
 import urlconnec.UrlReadWrite;
 import view.AppSwing;
 

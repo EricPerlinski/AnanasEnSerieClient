@@ -11,7 +11,6 @@ import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -107,7 +106,7 @@ public class AppSwing extends JFrame {
 				if (result == JOptionPane.OK_OPTION) {
 
 					QRCode qr = null;
-					JOptionPane pane = new JOptionPane();
+				
 					switch(type.getSelectedIndex()){
 					case 0:
 						qr=new Like();
