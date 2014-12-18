@@ -23,6 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import qrcode.SimpleQrcodeGenerator;
+
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import model.Like;
@@ -48,7 +50,7 @@ public class AppSwing extends JFrame {
 	private JLabel labelc1;
 	private JLabel labelc2;
 	private JPanel Coul;
-	
+	private ErrorCorrectionLevel level = ErrorCorrectionLevel.H;
 	
 	
 	QRCodeView client = new QRCodeView();
@@ -129,6 +131,19 @@ public class AppSwing extends JFrame {
 		Coul.add(labelc2);
 		myPanel.add(Coul);
 		
+		
+		QRCodeRedundance.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				switch(QRCodeRedundance.getSelectedIndex()){
+					case 0:level = ErrorCorrectionLevel.L;break;
+					case 1:level = ErrorCorrectionLevel.M;break;
+					case 2:level = ErrorCorrectionLevel.H;break;
+					default: level = ErrorCorrectionLevel.M;break;
+				}
+			}
+		});
 		
 		showc1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -220,7 +235,7 @@ public class AppSwing extends JFrame {
 				
 				jop.setSize(new Dimension(1000, 50));
 				
-				ErrorCorrectionLevel level = null;
+				
 			
 				UIManager.put("OptionPane.cancelButtonText", "Annuler");
 				UIManager.put("OptionPane.okButtonText", "Continuer");
@@ -316,18 +331,38 @@ public class AppSwing extends JFrame {
 						u.registerOnline(qr);
 						
 						switch(QRCodeType.getSelectedIndex()){
-						case 0: client.getQRCode().setURL(url+qr.getPath());
-								
+						case 0: 
+								SimpleQrcodeGenerator.color_1 = null;
+								SimpleQrcodeGenerator.color_2 = null;
+								client.getQRCode().setURL(url+qr.getPath());
 								if(qr.getNbView()==3){
 									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
 								}
 								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 								break;
-						case 1: 
+						case 1: SimpleQrcodeGenerator.color_1 = c1;
+								SimpleQrcodeGenerator.color_2 = null;
+								client.getQRCode().setURL(url+qr.getPath());
+								if(qr.getNbView()==3){
+									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
+								}
+								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 								break;
-						case 2: 
+						case 2: SimpleQrcodeGenerator.color_1 = c1;
+								SimpleQrcodeGenerator.color_2 = c2;
+								client.getQRCode().setURL(url+qr.getPath());
+								if(qr.getNbView()==3){
+									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
+								}
+								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 								break;
 						default:
+								SimpleQrcodeGenerator.color_2 = c2;
+								client.getQRCode().setURL(url+qr.getPath());
+								if(qr.getNbView()==3){
+									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
+								}
+								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 								break;
 						}
 						

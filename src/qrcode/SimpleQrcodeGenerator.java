@@ -6,7 +6,6 @@ import java.awt.RadialGradientPaint;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +47,7 @@ public class SimpleQrcodeGenerator {
 
 	private ByteMatrix generateMatrix(String data, ErrorCorrectionLevel level) throws WriterException {
 		QRCode qr = new QRCode();
+		System.out.println("data="+data+"/level="+level+"/qr="+qr);
 		Encoder.encode(data, level, qr);
 		ByteMatrix matrix = qr.getMatrix();
 		return matrix;
