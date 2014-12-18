@@ -248,10 +248,17 @@ public class AppSwing extends JFrame {
 						jp = new JPanel();
 						gr = new GridLayout(1,2);
 						jp.setLayout(gr);
+						jp.remove(non);
+						jp.remove(client);
+						jp.remove(admin);
+						jp.repaint();
+						jp.revalidate();
+						System.out.println("QR-Like");
 						jp.add(client);
 						jp.add(admin);
-						jp.remove(non);
 						add(jp, BorderLayout.CENTER);
+						jp.repaint();
+						jp.revalidate();
 						break;
 					case 1:
 						RedirectJPanel RedirectPanel = new RedirectJPanel();
@@ -266,10 +273,14 @@ public class AppSwing extends JFrame {
 						jp = new JPanel();
 						gr = new GridLayout(1,2);
 						jp.setLayout(gr);
+						jp.remove(non);
+						jp.remove(client);
+						jp.remove(admin);
 						jp.add(client);
 						jp.add(admin);
-						jp.remove(non);
 						add(jp, BorderLayout.CENTER);
+						jp.repaint();
+						jp.revalidate();
 						break;
 					case 2:
 						YesNoJPanel YNPanel = new YesNoJPanel();
@@ -286,10 +297,17 @@ public class AppSwing extends JFrame {
 						jp = new JPanel();
 						gr = new GridLayout(1,3);
 						jp.setLayout(gr);
+						jp.remove(non);
+						jp.remove(client);
+						jp.remove(admin);
+						jp.repaint();
+						jp.revalidate();
 						jp.add(client);
 						jp.add(non);
 						jp.add(admin);
 						add(jp, BorderLayout.CENTER);
+						jp.repaint();
+						jp.revalidate();
 						break;
 					case 3:
 						System.out.println("Sondage");
@@ -303,11 +321,32 @@ public class AppSwing extends JFrame {
 						jp = new JPanel();
 						gr = new GridLayout(1,2);
 						jp.setLayout(gr);
+						jp.remove(non);
+						jp.remove(client);
+						jp.remove(admin);
 						jp.add(client);
 						jp.add(admin);
-						jp.remove(non);
 						add(jp, BorderLayout.CENTER);
+						jp.repaint();
+						jp.revalidate();
 						break;
+						
+						default:	qr=new Like();
+									jp = new JPanel();
+									gr = new GridLayout(1,2);
+									jp.setLayout(gr);
+									jp.remove(non);
+									jp.remove(client);
+									System.out.println("LIKE");
+									jp.remove(admin);
+									jp.add(client);
+									jp.add(admin);
+									
+									add(jp, BorderLayout.CENTER);
+									jp.repaint();
+									jp.revalidate();
+									break;
+						
 					}
 
 
