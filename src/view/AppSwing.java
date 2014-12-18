@@ -216,12 +216,12 @@ public class AppSwing extends JFrame {
 						UrlReadWrite u = new UrlReadWrite(url);
 						u.registerOnline(qr);
 						
-						client.getQRCode().setURL(url+"index.php/"+qr.getPath());
+						client.getQRCode().setURL(url+qr.getPath());
 						if(qr.getNbView()==3){
-							non.getQRCode().setURL(url+"index.php/"+((YesNo) qr).getNoLien());
-							System.out.println(url+"index.php/"+((YesNo) qr).getNoLien());
+							non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
+							System.out.println(url+((YesNo) qr).getNoLien());
 						}
-						admin.getQRCode().setURL(url+"index.php/admin/get/"+qr.getPathAdmin());
+						admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 
 
 
