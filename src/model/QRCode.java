@@ -25,6 +25,11 @@ public class QRCode {
 		questions=new ArrayList<Question>();
 	}
 
+	public void parseJson(String JSON){
+		
+	}
+	
+	
 	
 	public QRCode(String newTitre,String newLien){
 		titre = newTitre;

@@ -2,7 +2,6 @@ package urlconnec;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -13,8 +12,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JOptionPane;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -67,7 +64,6 @@ public class UrlReadWrite {
 		StringBuffer res = null;
 		try{
 			System.out.println(url+"index.php"+sondage.getLien());
-			System.out.println();
 			conn = (HttpURLConnection) new URL(url+"index.php"+sondage.getLien()).openConnection();
 			conn.setReadTimeout(10000);
 			conn.setConnectTimeout(15000);
@@ -78,7 +74,7 @@ public class UrlReadWrite {
 			List<NameValuePair> paramHttp = new ArrayList<NameValuePair>();				
 
 			paramHttp.add(new NameValuePair("objet",sondage.toJson()));
-			
+
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(
 					new OutputStreamWriter(os, "UTF-8"));
@@ -102,25 +98,24 @@ public class UrlReadWrite {
 			}else if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){
 				System.out.println("404");
 			}
-			
-			JSONParser parser = new JSONParser();
-            
-			
-				Object obj= parser.parse(res.toString());
-			  	JSONArray array=(JSONArray)obj;
-			  	JSONObject obj2=(JSONObject)array.get(0);
-			  	sondage.setPath(obj2.get("path").toString());
-			  	sondage.setPathAdmin(obj2.get("pathAdmin").toString());
-		}catch(ParseException pe){
-			JOptionPane.showMessageDialog(null,"Erreur de données avec le serveur.","Erreur de données",JOptionPane.ERROR_MESSAGE);
-		}catch(FileNotFoundException fnfe){
-			JOptionPane.showMessageDialog(null,"Erreur de connexion avec le serveur.","Erreur de connexion",JOptionPane.ERROR_MESSAGE);
+
 		}catch(Exception e){
-			JOptionPane.showMessageDialog(null,"Erreur de l'application.","Erreur de l'application",JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 		}
 		
 		
-		
+		JSONParser parser = new JSONParser();
+		                
+		try{
+			Object obj= parser.parse(res.toString());
+		  	JSONArray array=(JSONArray)obj;
+		  	JSONObject obj2=(JSONObject)array.get(0);
+		  	sondage.setPath(obj2.get("path").toString());
+		  	sondage.setPathAdmin(obj2.get("pathAdmin").toString());
+		}catch(ParseException pe){
+			System.out.println("position: " + pe.getPosition());
+			System.out.println(pe);
+		}
 
 
 	}
@@ -153,8 +148,8 @@ public class UrlReadWrite {
 			}
 
 		}catch(Exception e){
-			JOptionPane.showMessageDialog(null,"Le serveur n'est pas disponible, veuillez vérifier l'adresse fournie dans le fichier /config/server.properties.","Erreur adresse serveur",JOptionPane.ERROR_MESSAGE);
-			}
+			System.out.println("Le serveur n'est pas disponible, veuillez vérifier l'adresse fournie dans le fichier /config/server.properties");
+		}
 		
 		if(! (res == null)){
 			return res.toString().equalsIgnoreCase("ananas");

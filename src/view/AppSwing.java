@@ -37,8 +37,14 @@ public class AppSwing extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton creator;
+	private JPanel jp;
+	private GridLayout gr;
+	
+	
 	QRCodeView client = new QRCodeView();
+	QRCodeView non = new QRCodeView();
 	QRCodeView admin = new QRCodeView();
+	
 
 
 
@@ -48,12 +54,7 @@ public class AppSwing extends JFrame {
 		this.setTitle("Allez vient, on créé des QRCode pour le fun !");
 		this.setMinimumSize(new Dimension(900, 500));
 		this.setLayout(new BorderLayout());
-		JPanel jp = new JPanel();
-		GridLayout gr = new GridLayout(1,2);
-		jp.setLayout(gr);
-		jp.add(client);
-		jp.add(admin);
-
+		
 		JButton jb = getCreator();
 		JPanel panelButton = new JPanel();
 		panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.X_AXIS));
@@ -61,12 +62,15 @@ public class AppSwing extends JFrame {
 		panelButton.add(jb);
 		panelButton.add(Box.createGlue());
 
+		
+		
+				
 		this.add(panelButton, BorderLayout.NORTH);
-		this.add(jp, BorderLayout.CENTER);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
+	
 
 	private JButton getCreator(){
 
@@ -113,7 +117,7 @@ public class AppSwing extends JFrame {
 		myPanel.add(imageSize);
 		
 		
-
+		
 
 		creator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -131,6 +135,7 @@ public class AppSwing extends JFrame {
 				UIManager.put("OptionPane.cancelButtonText", "Annuler");
 				UIManager.put("OptionPane.okButtonText", "Continuer");
 
+				
 				int result = JOptionPane.showConfirmDialog(null, myPanel, "Formulaire", JOptionPane.OK_CANCEL_OPTION);
 
 				if (result == JOptionPane.OK_OPTION) {
@@ -140,6 +145,15 @@ public class AppSwing extends JFrame {
 					switch(type.getSelectedIndex()){
 					case 0:
 						qr=new Like();
+						
+						
+						jp = new JPanel();
+						gr = new GridLayout(1,2);
+						jp.setLayout(gr);
+						jp.add(client);
+						jp.add(admin);
+						add(jp, BorderLayout.CENTER);
+						
 						break;
 					case 1:
 						RedirectJPanel RedirectPanel = new RedirectJPanel();
@@ -152,10 +166,20 @@ public class AppSwing extends JFrame {
 							System.out.println(RedirectPanel.getUrlField());
 							((Redirect)qr).setUrl(RedirectPanel.getUrlField());
 						}
+						jp = new JPanel();
+						gr = new GridLayout(1,2);
+						jp.setLayout(gr);
+						jp.add(client);
+						jp.add(admin);
+						add(jp, BorderLayout.CENTER);
+						
 						break;
 					case 2:
 						YesNoJPanel YNPanel = new YesNoJPanel();
 						YNPanel = new YesNoJPanel();
+						
+					
+						
 						UIManager.put("OptionPane.cancelButtonText", "Annuler");
 						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
 						result = JOptionPane.showConfirmDialog(null,YNPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
@@ -165,10 +189,26 @@ public class AppSwing extends JFrame {
 							System.out.println(YNPanel.getNameQuestion());
 							((YesNo)qr).setQuestion(YNPanel.getNameQuestion());
 						}
+						
+						jp = new JPanel();
+						gr = new GridLayout(1,3);
+						jp.setLayout(gr);
+						jp.add(client);
+						jp.add(non);
+						jp.add(admin);
+						add(jp, BorderLayout.CENTER);
+						
 						break;
 					case 3:
 						System.out.println("Sondage");
 						qr=new Survey();
+						jp = new JPanel();
+						gr = new GridLayout(1,3);
+						jp.setLayout(gr);
+						jp.add(client);
+						jp.add(non);
+						jp.add(admin);
+						add(jp, BorderLayout.CENTER);
 						break;
 					}
 
@@ -237,6 +277,26 @@ public class AppSwing extends JFrame {
 			}
 		});
 		return creator;
+	}
+
+
+	public JPanel getJp() {
+		return jp;
+	}
+
+
+	public void setJp(JPanel jp) {
+		this.jp = jp;
+	}
+
+
+	public GridLayout getGr() {
+		return gr;
+	}
+
+
+	public void setGr(GridLayout gr) {
+		this.gr = gr;
 	}
 
 }

@@ -2,12 +2,15 @@ package model;
 
 public class YesNo extends QRCode{
 	
+	private String noLien;
 	private String question;
 	
 	public YesNo(){
 		this.setLien("/api/admin/add/yesno");
 		question=null;
 	}
+	
+	
 	
 	public void setQuestion(String q){
 		question=q;
@@ -23,6 +26,14 @@ public class YesNo extends QRCode{
 		json.append("}");
 		
 		return json.toString();
+	}
+
+	public String getNoLien() {
+		return noLien;
+	}
+
+	public void setNoLien(String noLien) {
+		this.noLien = noLien;
 	}
 	
 	
