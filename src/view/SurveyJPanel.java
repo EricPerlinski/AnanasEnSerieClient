@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -31,19 +32,19 @@ public class SurveyJPanel extends JPanel{
 	private JButton question = new JButton("Ajouter une question");
 	private ArrayList<JPanel> listItem = new ArrayList<JPanel>();
 	
-	private Survey survey;
-
-	public SurveyJPanel(QRCode s){
-		this.survey = (Survey)s;
+	public SurveyJPanel(){
+		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		list.setLayout(new BoxLayout(list, BoxLayout.Y_AXIS));
 		scrollablePanel.setPreferredSize(new Dimension(500,600));
 		scrollablePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.add(Box.createGlue());
 		this.add(scrollablePanel);
 		JPanel jp = new JPanel();
 		jp.add(checkBox);
 		jp.add(radio);
 		jp.add(question);
 		this.add(jp);
+		this.add(Box.createGlue());
 		addListenersButtons();
 	}
 
@@ -113,6 +114,7 @@ public class SurveyJPanel extends JPanel{
 	}
 	
 	public Survey getSurvey(){
+		Survey survey = new Survey();
 		for(int i=0; i<listItem.size(); i++){
 			survey.addQuestion(((GetInfo)listItem.get(i)).getInfos());
 		}
@@ -123,8 +125,8 @@ public class SurveyJPanel extends JPanel{
 		try {UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");}catch (Exception e) {}
 		JFrame jf = new JFrame();
 		jf.setTitle("Creating QRCode Service");
-		jf.setMinimumSize(new Dimension(900, 900));
-		//jf.setContentPane(new SurveyJPanel());
+		jf.setMinimumSize(new Dimension(500, 500));
+		jf.setContentPane(new SurveyJPanel());
 		jf.setLocationRelativeTo(null);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setVisible(true);
