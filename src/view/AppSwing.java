@@ -111,7 +111,7 @@ public class AppSwing extends JFrame {
 		myPanel.add(QRCodeType);
 		Coul = new JPanel();
 		c1 = Color.black;
-		c2 = Color.white;
+		c2 = Color.black;
 		showc1 = new JButton("première couleur");
 		showc2 = new JButton("deuxième couleur");
 		labelc1 = new JLabel("              ");
@@ -145,7 +145,7 @@ public class AppSwing extends JFrame {
 			        Color initialBackground = Color.BLACK;
 			        c1 = JColorChooser.showDialog(null, "Change Button Background", initialBackground);
 			        if (c1 != null) {
-			        	System.out.println(c1.toString());
+			        	
 			        	labelc1.setBackground(c1);
 			        }
 			}
@@ -156,7 +156,7 @@ public class AppSwing extends JFrame {
 		        Color initialBackground = Color.BLACK;
 		        c2 = JColorChooser.showDialog(null, "Change Button Background", initialBackground);
 		        if (c2 != null) {
-		        	System.out.println(c2.toString());
+		        	
 		        	labelc2.setBackground(c2);
 		        }
 			}
@@ -172,7 +172,7 @@ public class AppSwing extends JFrame {
 						Coul.remove(labelc1);
 						Coul.remove(showc2);
 						Coul.remove(labelc2);
-						System.out.println("0");
+						
 						Coul.repaint();
 						Coul.revalidate();
 						break;
@@ -185,7 +185,7 @@ public class AppSwing extends JFrame {
 						Coul.remove(labelc2);
 						Coul.add(showc1,0);
 						Coul.add(labelc1,1);
-						System.out.println("1");
+						
 						Coul.repaint();
 						Coul.revalidate();
 						break;
@@ -200,7 +200,7 @@ public class AppSwing extends JFrame {
 						Coul.add(labelc1,1);
 						Coul.add(showc2,2);
 						Coul.add(labelc2,3);
-						System.out.println("2");
+						
 						Coul.repaint();
 						Coul.revalidate();
 						break;
@@ -250,6 +250,7 @@ public class AppSwing extends JFrame {
 						jp.setLayout(gr);
 						jp.add(client);
 						jp.add(admin);
+						jp.remove(non);
 						add(jp, BorderLayout.CENTER);
 						break;
 					case 1:
@@ -258,7 +259,6 @@ public class AppSwing extends JFrame {
 						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
 						result = JOptionPane.showConfirmDialog(null,RedirectPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
 						if(result == JOptionPane.OK_OPTION){
-							System.out.println("ok");
 							qr=new Redirect();
 							System.out.println(RedirectPanel.getUrlField());
 							((Redirect)qr).setUrl(RedirectPanel.getUrlField());
@@ -268,6 +268,7 @@ public class AppSwing extends JFrame {
 						jp.setLayout(gr);
 						jp.add(client);
 						jp.add(admin);
+						jp.remove(non);
 						add(jp, BorderLayout.CENTER);
 						break;
 					case 2:
@@ -277,7 +278,7 @@ public class AppSwing extends JFrame {
 						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
 						result = JOptionPane.showConfirmDialog(null,YNPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
 						if(result == JOptionPane.OK_OPTION){
-							System.out.println("ok");
+							
 							qr=new YesNo();
 							System.out.println(YNPanel.getNameQuestion());
 							((YesNo)qr).setQuestion(YNPanel.getNameQuestion());
@@ -304,6 +305,7 @@ public class AppSwing extends JFrame {
 						jp.setLayout(gr);
 						jp.add(client);
 						jp.add(admin);
+						jp.remove(non);
 						add(jp, BorderLayout.CENTER);
 						break;
 					}
@@ -313,12 +315,12 @@ public class AppSwing extends JFrame {
 
 						qr.setTitre(question.getText());
 
-						System.out.println(qr.toJson());
+					
 
 						String url = null;
 						try{
 							url = ReadPropertyFile.getUrl();
-							System.out.println(url);
+							
 						}catch(Exception ex){
 							ex.printStackTrace();
 						}
@@ -327,7 +329,7 @@ public class AppSwing extends JFrame {
 						
 						switch(QRCodeType.getSelectedIndex()){
 						case 0: 
-								System.out.println("AppSwing : Color C1 = "+c1+"/ Color C2 = "+c2);
+							
 								client.getQRCode().setColor_1(null);
 								client.getQRCode().setColor_2(null);
 								client.getQRCode().setURL(url+qr.getPath());
@@ -341,7 +343,7 @@ public class AppSwing extends JFrame {
 								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 								break;
 						case 1:
-								System.out.println("AppSwing : Color C1 = "+c1+"/ Color C2 = "+c2);
+							
 								client.getQRCode().setColor_1(c1);
 								client.getQRCode().setColor_2(null);
 								client.getQRCode().setURL(url+qr.getPath());
@@ -355,7 +357,7 @@ public class AppSwing extends JFrame {
 								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 								break;
 						case 2: 
-								System.out.println("AppSwing : Color C1 = "+c1+"/ Color C2 = "+c2);
+								
 								client.getQRCode().setColor_1(c1);
 								client.getQRCode().setColor_2(c2);
 								client.getQRCode().setURL(url+qr.getPath());

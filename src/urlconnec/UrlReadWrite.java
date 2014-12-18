@@ -104,6 +104,7 @@ public class UrlReadWrite {
 		}
 		
 		try{
+		
 		sondage.parseJSON(res.toString());
 		}catch(Exception e){
 			e.printStackTrace();
@@ -116,7 +117,7 @@ public class UrlReadWrite {
 	public boolean testConnection(){
 		StringBuffer res = null;
 		try{
-			conn = (HttpURLConnection) new URL(url+"/api/test").openConnection();
+			conn = (HttpURLConnection) new URL(url+"api/test").openConnection();
 			conn.setReadTimeout(10000);
 			conn.setConnectTimeout(15000);
 			conn.setRequestMethod("GET");
@@ -209,7 +210,7 @@ public class UrlReadWrite {
 			e.printStackTrace();
 		}
 		
-		System.out.println("String à parser : "+res);
+		
 		
 		JSONParser parser = new JSONParser();
 		                

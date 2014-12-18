@@ -46,8 +46,6 @@ public class SimpleQrcodeGenerator {
 
 	private ByteMatrix generateMatrix(String data, ErrorCorrectionLevel level) throws WriterException {
 		QRCode qr = new QRCode();
-		System.out.println("data="+data+"/level="+level+"/qr="+qr);
-		System.out.println("C1 = "+color_1+"/C2 = "+color_2);
 		Encoder.encode(data, level, qr);
 		ByteMatrix matrix = qr.getMatrix();
 		return matrix;

@@ -7,7 +7,7 @@ public class Like extends QRCode{
 
 	public Like(){
 		this.nbView = 2;
-		this.setLien("/api/admin/add/like");
+		this.setLien("api/admin/add/like");
 		nbLike=0;
 	}
 
