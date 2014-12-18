@@ -21,6 +21,10 @@ import model.RadioButtonQuestion;
 
 public class ButtonQuestionJPanel extends JPanel implements GetInfo{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final static int TYPE_CHECK_BOX = 1;
 	public final static int TYPE_RADIO = 2;
 

@@ -12,6 +12,10 @@ import model.Question;
 public class OpenQuestionJPanel extends JPanel implements GetInfo {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField question = new JTextField(20);
 	private JLabel nameLabel = new JLabel("Question ouverte : ");
 	
