@@ -58,7 +58,7 @@ public class AppSwing extends JFrame {
 	public AppSwing(){
 		try {UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");}catch (Exception e) {}
 
-		this.setTitle("Allez vient, on créé des QRCode pour le fun !");
+		this.setTitle("Création de QR Codes !");
 		this.setMinimumSize(new Dimension(900, 500));
 		this.setLayout(new BorderLayout());
 		
