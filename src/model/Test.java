@@ -22,6 +22,7 @@ public class Test {
 		
 	
 		
+		@SuppressWarnings("unused")
 		String json = "{\"name\" : \"yooo\" , \"items\" : [\"item1\" , \"item2\" , \"item3\" , \"item4\" , \"item5\"] , \"selected\" : [\"1\" , \"3\" , \"20\"]}";
 
 		
@@ -38,6 +39,7 @@ public class Test {
 		q3.setSelected(3);
 		
 	
+		@SuppressWarnings("unused")
 		String json2 = "{\"name\" : \"yooo\" , \"items\" : [\"item1\" , \"item2\" , \"item3\" , \"item4\" , \"item5\"] , \"selected\" : \"3\"}";
 
 		

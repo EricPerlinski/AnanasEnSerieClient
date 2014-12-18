@@ -10,15 +10,17 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
 public class ButtonQuestionJPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final static int TYPE_CHECK_BOX = 1;
 	public final static int TYPE_RADIO = 2;
 	
@@ -33,7 +35,7 @@ public class ButtonQuestionJPanel extends JPanel {
 	
 	
 	public ButtonQuestionJPanel(int type){
-		this.type = type;
+		this.setType(type);
 		JPanel jp = new JPanel();
 		jp.add(titleLabel);
 		jp.add(title);
@@ -82,6 +84,14 @@ public class ButtonQuestionJPanel extends JPanel {
 		listFields.remove(jp);
 		list.remove(jp);
 		list.repaint();
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 	
 	/*public static void main(String args[]){
