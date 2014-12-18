@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
 import model.Like;
 import model.QRCode;
 import model.Redirect;
@@ -72,32 +74,60 @@ public class AppSwing extends JFrame {
 
 		final JTextField question = new JTextField(30);
 		final JComboBox<String> type = new JComboBox<String>();
+		final JComboBox<String>	QRCodeType = new JComboBox<String>();
+		final JComboBox<String> QRCodeRedundance = new JComboBox<String>();
 		
 		type.addItem("Like");
 		type.addItem("Redirection");
 		type.addItem("Oui/Non");
 		type.addItem("Sondage");
 		
-
+		QRCodeType.addItem("Noir et blanc");
+		QRCodeType.addItem("Couleur unie");
+		QRCodeType.addItem("Dégradé en 2 couleurs");
+		QRCodeType.setSelectedIndex(0);
+		
+		QRCodeRedundance.addItem("Low");
+		QRCodeRedundance.addItem("Medium (recommandé)");
+		QRCodeRedundance.addItem("High");
+		QRCodeRedundance.setSelectedIndex(1);
+		
 		final JTextField imageSize = new JTextField();
 		final JPanel myPanel = new JPanel();
 		BoxLayout gl = new BoxLayout(myPanel, BoxLayout.Y_AXIS);
 		myPanel.setLayout(gl);
 		myPanel.add(new JLabel("Titre affiché pour le QrCode : "));
 		myPanel.add(question);
-
+		
 		myPanel.add(new JLabel("Type de QrCode : "));
+		myPanel.add(QRCodeType);
+		
+		myPanel.add(new JLabel("Redondance du QrCode : "));
+		myPanel.add(QRCodeRedundance);
+
+		myPanel.add(new JLabel("Type d'utilisation : "));
 		myPanel.add(type);
 
 		myPanel.add(new JLabel("Taille (pixels) : "));
 		imageSize.setText("250");
 		myPanel.add(imageSize);
+		
+		
 
 
 		creator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane jop = new JOptionPane();
 				jop.setSize(new Dimension(100, 50));
+				
+				ErrorCorrectionLevel level = null;
+				switch(QRCodeRedundance.getSelectedIndex()){
+					case 0: level = ErrorCorrectionLevel.L;break;
+					case 1: level = ErrorCorrectionLevel.M;break;
+					case 2: level = ErrorCorrectionLevel.H;break;
+					default: level = ErrorCorrectionLevel.M;break;
+				}
+			
 				UIManager.put("OptionPane.cancelButtonText", "Annuler");
 				UIManager.put("OptionPane.okButtonText", "Continuer");
 
@@ -159,7 +189,6 @@ public class AppSwing extends JFrame {
 						UrlReadWrite u = new UrlReadWrite(url);
 						u.registerOnline(qr);
 
-
 						client.getQRCode().setURL(url+"index.php/"+qr.getPath());
 						admin.getQRCode().setURL(url+"index.php/admin/get/"+qr.getPathAdmin());
 
@@ -178,11 +207,15 @@ public class AppSwing extends JFrame {
 								}else{
 									filename = str;
 								}
-								client.setFile(client.getQRCode().createQRCode(filename, "png", Integer.parseInt(imageSize.getText())));
+								
+								
+								
+								
+								client.setFile(client.getQRCode().createQRCode(filename, "png", Integer.parseInt(imageSize.getText()),level));
 								client.updateGraphics();
 
 
-								admin.setFile(admin.getQRCode().createQRCode(filename+ "_admin", "png", Integer.parseInt(imageSize.getText())));
+								admin.setFile(admin.getQRCode().createQRCode(filename+ "_admin", "png", Integer.parseInt(imageSize.getText()), level));
 								admin.updateGraphics();
 
 							} catch (Exception ex) {

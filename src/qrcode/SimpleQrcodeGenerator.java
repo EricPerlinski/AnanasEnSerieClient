@@ -23,11 +23,12 @@ public class SimpleQrcodeGenerator {
 	
 	private String url = "";
 
-	public File createQRCode(String name, String imageFormat, int size){
+	public File createQRCode(String name, String imageFormat, int size,ErrorCorrectionLevel level){
 
+		
 		// encode
 		ByteMatrix byteMatrix = null;
-		ErrorCorrectionLevel level = ErrorCorrectionLevel.H;
+		
 		try {
 			String outputFileName = name + "." + imageFormat;
 			System.out.println(url);

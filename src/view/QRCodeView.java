@@ -45,6 +45,7 @@ public class QRCodeView extends JPanel {
 	
 	
 	private void additionJLabel(JPanel principal) {
+		
 		image = new JLabel();
 		image.setBounds(75, 60, 250, 250);
 		principal.add(image);
