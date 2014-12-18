@@ -256,15 +256,7 @@ public class AppSwing extends JFrame {
 							}
 						}
 					}
-					/*
-					client.getQRCode().setURL(url+"index.php/flash/"+s.getPath());
-					client.setFile(client.getQRCode().createQRCode(imageName.getText(), "png", Integer.parseInt(imageSize.getText())));
-					client.updateGraphics();
-
-					admin.getQRCode().setURL(url+"index.php/admin/get/"+s.getPathAdmin());
-					admin.setFile(admin.getQRCode().createQRCode(imageName.getText() + "_admin", "png", Integer.parseInt(imageSize.getText())));
-					admin.updateGraphics();
-					 */
+					
 
 				}
 			}
