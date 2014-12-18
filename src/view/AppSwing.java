@@ -3,6 +3,7 @@ package view;
 import helpers.ReadPropertyFile;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.io.File;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -20,21 +22,30 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
 import model.Like;
 import model.QRCode;
 import model.Redirect;
-import model.Survey;
 import model.YesNo;
 import urlconnec.UrlReadWrite;
 
 public class AppSwing extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton creator;
 	private JPanel jp;
+	private Color c1;
+	private JButton showc1;
+	private JButton showc2;
+	private Color c2;
 	private GridLayout gr;
+	private JLabel labelc1;
+	private JLabel labelc2;
+	private JPanel Coul;
+	private ErrorCorrectionLevel level = ErrorCorrectionLevel.H;
 	
 	
 	QRCodeView client = new QRCodeView();
@@ -57,7 +68,7 @@ public class AppSwing extends JFrame {
 		panelButton.add(Box.createGlue());
 		panelButton.add(jb);
 		panelButton.add(Box.createGlue());
-				
+
 		this.add(panelButton, BorderLayout.NORTH);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,7 +93,7 @@ public class AppSwing extends JFrame {
 		QRCodeType.addItem("Noir et blanc");
 		QRCodeType.addItem("Couleur unie");
 		QRCodeType.addItem("Dégradé en 2 couleurs");
-		QRCodeType.setSelectedIndex(0);
+		QRCodeType.setSelectedIndex(2);
 		
 		QRCodeRedundance.addItem("Low");
 		QRCodeRedundance.addItem("Medium (recommandé)");
@@ -98,10 +109,111 @@ public class AppSwing extends JFrame {
 		
 		myPanel.add(new JLabel("Type de QrCode : "));
 		myPanel.add(QRCodeType);
+		Coul = new JPanel();
+		c1 = Color.black;
+		c2 = Color.white;
+		showc1 = new JButton("première couleur");
+		showc2 = new JButton("deuxième couleur");
+		labelc1 = new JLabel("              ");
+		labelc1.setBackground(c1);
+		labelc2 = new JLabel("              ");
+		labelc2.setBackground(c2);
+		labelc1.setOpaque(true);
+		labelc2.setOpaque(true);
+		Coul.add(showc1);
+		Coul.add(labelc1);
+		Coul.add(showc2);
+		Coul.add(labelc2);
+		myPanel.add(Coul);
+		
+		
+		QRCodeRedundance.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				switch(QRCodeRedundance.getSelectedIndex()){
+					case 0:level = ErrorCorrectionLevel.L;break;
+					case 1:level = ErrorCorrectionLevel.M;break;
+					case 2:level = ErrorCorrectionLevel.H;break;
+					default: level = ErrorCorrectionLevel.M;break;
+				}
+			}
+		});
+		
+		showc1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			        Color initialBackground = Color.BLACK;
+			        c1 = JColorChooser.showDialog(null, "Change Button Background", initialBackground);
+			        if (c1 != null) {
+			        	System.out.println(c1.toString());
+			        	labelc1.setBackground(c1);
+			        }
+			}
+		});
+		
+		showc2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        Color initialBackground = Color.BLACK;
+		        c2 = JColorChooser.showDialog(null, "Change Button Background", initialBackground);
+		        if (c2 != null) {
+		        	System.out.println(c2.toString());
+		        	labelc2.setBackground(c2);
+		        }
+			}
+		});
+		
+		QRCodeType.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switch(QRCodeType.getSelectedIndex()){
+					case 0: 
+						showc1.setText("couleur");
+						showc2.setText("deuxième couleur");
+						Coul.remove(showc1);
+						Coul.remove(labelc1);
+						Coul.remove(showc2);
+						Coul.remove(labelc2);
+						System.out.println("0");
+						Coul.repaint();
+						Coul.revalidate();
+						break;
+					case 1: 
+						showc1.setText("couleur");
+						showc2.setText("deuxième couleur");
+						Coul.remove(showc1);
+						Coul.remove(labelc1);
+						Coul.remove(showc2);
+						Coul.remove(labelc2);
+						Coul.add(showc1,0);
+						Coul.add(labelc1,1);
+						System.out.println("1");
+						Coul.repaint();
+						Coul.revalidate();
+						break;
+					case 2:
+						showc1.setText("première couleur");
+						showc2.setText("deuxième couleur");
+						Coul.remove(showc1);
+						Coul.remove(labelc1);
+						Coul.remove(showc2);
+						Coul.remove(labelc2);
+						Coul.add(showc1,0);
+						Coul.add(labelc1,1);
+						Coul.add(showc2,2);
+						Coul.add(labelc2,3);
+						System.out.println("2");
+						Coul.repaint();
+						Coul.revalidate();
+						break;
+					default: break;
+				}
+			}
+		});
+		
+		
 		
 		myPanel.add(new JLabel("Redondance du QrCode : "));
 		myPanel.add(QRCodeRedundance);
-
+		
 		myPanel.add(new JLabel("Type d'utilisation : "));
 		myPanel.add(type);
 
@@ -115,20 +227,15 @@ public class AppSwing extends JFrame {
 		creator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane jop = new JOptionPane();
-				jop.setSize(new Dimension(100, 50));
 				
-				ErrorCorrectionLevel level = null;
-				switch(QRCodeRedundance.getSelectedIndex()){
-					case 0: level = ErrorCorrectionLevel.L;break;
-					case 1: level = ErrorCorrectionLevel.M;break;
-					case 2: level = ErrorCorrectionLevel.H;break;
-					default: level = ErrorCorrectionLevel.M;break;
-				}
+				jop.setSize(new Dimension(1000, 50));
+				
+				
 			
 				UIManager.put("OptionPane.cancelButtonText", "Annuler");
 				UIManager.put("OptionPane.okButtonText", "Continuer");
 
-				
+			
 				int result = JOptionPane.showConfirmDialog(null, myPanel, "Formulaire", JOptionPane.OK_CANCEL_OPTION);
 
 				if (result == JOptionPane.OK_OPTION) {
@@ -185,14 +292,13 @@ public class AppSwing extends JFrame {
 						break;
 					case 3:
 						System.out.println("Sondage");
-						qr = new Survey();
-						SurveyJPanel SPanel = new SurveyJPanel(qr);
+						SurveyJPanel SPanel = new SurveyJPanel();
 						UIManager.put("OptionPane.cancelButtonText", "Annuler");
 						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
-						result = JOptionPane.showConfirmDialog(null,SPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
+						result = JOptionPane.showConfirmDialog(null,SPanel,"Sondage",JOptionPane.OK_CANCEL_OPTION);
 						if(result == JOptionPane.OK_OPTION){
 							qr = SPanel.getSurvey();
-						}
+						}else
 						jp = new JPanel();
 						gr = new GridLayout(1,2);
 						jp.setLayout(gr);
@@ -219,12 +325,61 @@ public class AppSwing extends JFrame {
 						UrlReadWrite u = new UrlReadWrite(url);
 						u.registerOnline(qr);
 						
-						client.getQRCode().setURL(url+qr.getPath());
-						if(qr.getNbView()==3){
-							non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
-							System.out.println(url+((YesNo) qr).getNoLien());
+						switch(QRCodeType.getSelectedIndex()){
+						case 0: 
+								System.out.println("AppSwing : Color C1 = "+c1+"/ Color C2 = "+c2);
+								client.getQRCode().setColor_1(null);
+								client.getQRCode().setColor_2(null);
+								client.getQRCode().setURL(url+qr.getPath());
+								if(qr.getNbView()==3){
+									non.getQRCode().setColor_1(null);
+									non.getQRCode().setColor_2(null);
+									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
+								}
+								admin.getQRCode().setColor_1(null);
+								admin.getQRCode().setColor_2(null);
+								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
+								break;
+						case 1:
+								System.out.println("AppSwing : Color C1 = "+c1+"/ Color C2 = "+c2);
+								client.getQRCode().setColor_1(c1);
+								client.getQRCode().setColor_2(null);
+								client.getQRCode().setURL(url+qr.getPath());
+								if(qr.getNbView()==3){
+									non.getQRCode().setColor_1(c1);
+									non.getQRCode().setColor_2(null);
+									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
+								}
+								admin.getQRCode().setColor_1(c1);
+								admin.getQRCode().setColor_2(null);
+								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
+								break;
+						case 2: 
+								System.out.println("AppSwing : Color C1 = "+c1+"/ Color C2 = "+c2);
+								client.getQRCode().setColor_1(c1);
+								client.getQRCode().setColor_2(c2);
+								client.getQRCode().setURL(url+qr.getPath());
+								if(qr.getNbView()==3){
+									non.getQRCode().setColor_1(c1);
+									non.getQRCode().setColor_2(c2);
+									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
+								}
+								admin.getQRCode().setColor_1(c1);
+								admin.getQRCode().setColor_2(c2);
+								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
+								break;
+						default:
+								
+								client.getQRCode().setURL(url+qr.getPath());
+								if(qr.getNbView()==3){
+									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
+								}
+								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
+								break;
 						}
-						admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
+						
+						
+						
 
 
 
@@ -285,6 +440,47 @@ public class AppSwing extends JFrame {
 
 	public void setGr(GridLayout gr) {
 		this.gr = gr;
+	}
+
+
+
+	public JButton getShowc1() {
+		return showc1;
+	}
+
+
+	public void setShowc1(JButton showc1) {
+		this.showc1 = showc1;
+	}
+
+
+	public JButton getShowc2() {
+		return showc2;
+	}
+
+
+	public void setShowc2(JButton showc2) {
+		this.showc2 = showc2;
+	}
+
+
+	public JLabel getLabelc1() {
+		return labelc1;
+	}
+
+
+	public void setLabelc1(JLabel labelc1) {
+		this.labelc1 = labelc1;
+	}
+
+
+	public JLabel getLabelc2() {
+		return labelc2;
+	}
+
+
+	public void setLabelc2(JLabel labelc2) {
+		this.labelc2 = labelc2;
 	}
 
 }

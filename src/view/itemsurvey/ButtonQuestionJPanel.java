@@ -21,6 +21,10 @@ import model.RadioButtonQuestion;
 
 public class ButtonQuestionJPanel extends JPanel implements GetInfo{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final static int TYPE_CHECK_BOX = 1;
 	public final static int TYPE_RADIO = 2;
 
@@ -29,7 +33,7 @@ public class ButtonQuestionJPanel extends JPanel implements GetInfo{
 	private JLabel titleLabel = new JLabel("Titre : ");
 	private JTextField title = new JTextField(20);
 	private JPanel list = new JPanel();
-	private JScrollPane scrollablePanel = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+	private JScrollPane scrollablePanel = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	private ArrayList<JTextField> listFields = new ArrayList<JTextField>();
 	private JButton add = new JButton("Ajouter un champ");
 
@@ -41,7 +45,7 @@ public class ButtonQuestionJPanel extends JPanel implements GetInfo{
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(jp);
 		list.setLayout(new BoxLayout(list, BoxLayout.X_AXIS));
-		scrollablePanel.setPreferredSize(new Dimension(400,70));
+		scrollablePanel.setPreferredSize(new Dimension(500,80));
 		this.add(scrollablePanel);
 		this.add(add);
 		addListenerButton();
@@ -59,7 +63,7 @@ public class ButtonQuestionJPanel extends JPanel implements GetInfo{
 
 	public void addField(){
 		final JTextField name = new JTextField(10);
-		JLabel nameLabel = new JLabel("Nom du champs : ");
+		JLabel nameLabel = new JLabel("Champs : ");
 		JButton remove = new JButton("X");
 		remove.setBackground(Color.RED);
 
