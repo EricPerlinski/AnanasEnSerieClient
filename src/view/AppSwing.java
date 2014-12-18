@@ -22,15 +22,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-
-import qrcode.SimpleQrcodeGenerator;
-
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
 import model.Like;
 import model.QRCode;
 import model.Redirect;
-import model.Survey;
 import model.YesNo;
 import urlconnec.UrlReadWrite;
 
@@ -148,7 +143,7 @@ public class AppSwing extends JFrame {
 		showc1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			        Color initialBackground = Color.BLACK;
-			        Color c1 = JColorChooser.showDialog(null, "Change Button Background", initialBackground);
+			        c1 = JColorChooser.showDialog(null, "Change Button Background", initialBackground);
 			        if (c1 != null) {
 			        	System.out.println(c1.toString());
 			        	labelc1.setBackground(c1);
@@ -159,7 +154,7 @@ public class AppSwing extends JFrame {
 		showc2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		        Color initialBackground = Color.BLACK;
-		        Color c2 = JColorChooser.showDialog(null, "Change Button Background", initialBackground);
+		        c2 = JColorChooser.showDialog(null, "Change Button Background", initialBackground);
 		        if (c2 != null) {
 		        	System.out.println(c2.toString());
 		        	labelc2.setBackground(c2);
@@ -332,32 +327,49 @@ public class AppSwing extends JFrame {
 						
 						switch(QRCodeType.getSelectedIndex()){
 						case 0: 
-								SimpleQrcodeGenerator.color_1 = null;
-								SimpleQrcodeGenerator.color_2 = null;
+								System.out.println("AppSwing : Color C1 = "+c1+"/ Color C2 = "+c2);
+								client.getQRCode().setColor_1(null);
+								client.getQRCode().setColor_2(null);
 								client.getQRCode().setURL(url+qr.getPath());
 								if(qr.getNbView()==3){
+									non.getQRCode().setColor_1(null);
+									non.getQRCode().setColor_2(null);
 									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
 								}
+								admin.getQRCode().setColor_1(null);
+								admin.getQRCode().setColor_2(null);
 								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 								break;
-						case 1: SimpleQrcodeGenerator.color_1 = c1;
-								SimpleQrcodeGenerator.color_2 = null;
+						case 1:
+								System.out.println("AppSwing : Color C1 = "+c1+"/ Color C2 = "+c2);
+								client.getQRCode().setColor_1(c1);
+								client.getQRCode().setColor_2(null);
 								client.getQRCode().setURL(url+qr.getPath());
 								if(qr.getNbView()==3){
+									non.getQRCode().setColor_1(c1);
+									non.getQRCode().setColor_2(null);
 									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
 								}
+								admin.getQRCode().setColor_1(c1);
+								admin.getQRCode().setColor_2(null);
 								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 								break;
-						case 2: SimpleQrcodeGenerator.color_1 = c1;
-								SimpleQrcodeGenerator.color_2 = c2;
+						case 2: 
+								System.out.println("AppSwing : Color C1 = "+c1+"/ Color C2 = "+c2);
+								client.getQRCode().setColor_1(c1);
+								client.getQRCode().setColor_2(c2);
 								client.getQRCode().setURL(url+qr.getPath());
 								if(qr.getNbView()==3){
+									non.getQRCode().setColor_1(c1);
+									non.getQRCode().setColor_2(c2);
 									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
 								}
+								admin.getQRCode().setColor_1(c1);
+								admin.getQRCode().setColor_2(c2);
 								admin.getQRCode().setURL(url+"admin/get/"+qr.getPathAdmin());
 								break;
 						default:
-								SimpleQrcodeGenerator.color_2 = c2;
+								
 								client.getQRCode().setURL(url+qr.getPath());
 								if(qr.getNbView()==3){
 									non.getQRCode().setURL(url+((YesNo) qr).getNoLien());
