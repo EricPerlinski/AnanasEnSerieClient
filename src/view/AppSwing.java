@@ -11,7 +11,6 @@ import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -21,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import model.Like;
 import model.QRCode;
@@ -36,8 +37,14 @@ public class AppSwing extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton creator;
+	private JPanel jp;
+	private GridLayout gr;
+	
+	
 	QRCodeView client = new QRCodeView();
+	QRCodeView non = new QRCodeView();
 	QRCodeView admin = new QRCodeView();
+	
 
 
 
@@ -47,12 +54,7 @@ public class AppSwing extends JFrame {
 		this.setTitle("Allez vient, on créé des QRCode pour le fun !");
 		this.setMinimumSize(new Dimension(900, 500));
 		this.setLayout(new BorderLayout());
-		JPanel jp = new JPanel();
-		GridLayout gr = new GridLayout(1,2);
-		jp.setLayout(gr);
-		jp.add(client);
-		jp.add(admin);
-
+		
 		JButton jb = getCreator();
 		JPanel panelButton = new JPanel();
 		panelButton.setLayout(new BoxLayout(panelButton, BoxLayout.X_AXIS));
@@ -60,12 +62,15 @@ public class AppSwing extends JFrame {
 		panelButton.add(jb);
 		panelButton.add(Box.createGlue());
 
+		
+		
+				
 		this.add(panelButton, BorderLayout.NORTH);
-		this.add(jp, BorderLayout.CENTER);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
+	
 
 	private JButton getCreator(){
 
@@ -73,44 +78,82 @@ public class AppSwing extends JFrame {
 
 		final JTextField question = new JTextField(30);
 		final JComboBox<String> type = new JComboBox<String>();
+		final JComboBox<String>	QRCodeType = new JComboBox<String>();
+		final JComboBox<String> QRCodeRedundance = new JComboBox<String>();
 		
 		type.addItem("Like");
 		type.addItem("Redirection");
-		//type.addItem("Oui/Non");
-		//type.addItem("Sondage");
+		type.addItem("Oui/Non");
+		type.addItem("Sondage");
 		
-
+		QRCodeType.addItem("Noir et blanc");
+		QRCodeType.addItem("Couleur unie");
+		QRCodeType.addItem("Dégradé en 2 couleurs");
+		QRCodeType.setSelectedIndex(0);
+		
+		QRCodeRedundance.addItem("Low");
+		QRCodeRedundance.addItem("Medium (recommandé)");
+		QRCodeRedundance.addItem("High");
+		QRCodeRedundance.setSelectedIndex(1);
+		
 		final JTextField imageSize = new JTextField();
 		final JPanel myPanel = new JPanel();
 		BoxLayout gl = new BoxLayout(myPanel, BoxLayout.Y_AXIS);
 		myPanel.setLayout(gl);
 		myPanel.add(new JLabel("Titre affiché pour le QrCode : "));
 		myPanel.add(question);
-
+		
 		myPanel.add(new JLabel("Type de QrCode : "));
+		myPanel.add(QRCodeType);
+		
+		myPanel.add(new JLabel("Redondance du QrCode : "));
+		myPanel.add(QRCodeRedundance);
+
+		myPanel.add(new JLabel("Type d'utilisation : "));
 		myPanel.add(type);
 
 		myPanel.add(new JLabel("Taille (pixels) : "));
 		imageSize.setText("250");
 		myPanel.add(imageSize);
-
+		
+		
+		
 
 		creator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane jop = new JOptionPane();
 				jop.setSize(new Dimension(100, 50));
+				
+				ErrorCorrectionLevel level = null;
+				switch(QRCodeRedundance.getSelectedIndex()){
+					case 0: level = ErrorCorrectionLevel.L;break;
+					case 1: level = ErrorCorrectionLevel.M;break;
+					case 2: level = ErrorCorrectionLevel.H;break;
+					default: level = ErrorCorrectionLevel.M;break;
+				}
+			
 				UIManager.put("OptionPane.cancelButtonText", "Annuler");
 				UIManager.put("OptionPane.okButtonText", "Continuer");
 
+				
 				int result = JOptionPane.showConfirmDialog(null, myPanel, "Formulaire", JOptionPane.OK_CANCEL_OPTION);
 
 				if (result == JOptionPane.OK_OPTION) {
 
 					QRCode qr = null;
-					JOptionPane pane = new JOptionPane();
+				
 					switch(type.getSelectedIndex()){
 					case 0:
 						qr=new Like();
+						
+						
+						jp = new JPanel();
+						gr = new GridLayout(1,2);
+						jp.setLayout(gr);
+						jp.add(client);
+						jp.add(admin);
+						add(jp, BorderLayout.CENTER);
+						
 						break;
 					case 1:
 						RedirectJPanel RedirectPanel = new RedirectJPanel();
@@ -123,10 +166,20 @@ public class AppSwing extends JFrame {
 							System.out.println(RedirectPanel.getUrlField());
 							((Redirect)qr).setUrl(RedirectPanel.getUrlField());
 						}
+						jp = new JPanel();
+						gr = new GridLayout(1,2);
+						jp.setLayout(gr);
+						jp.add(client);
+						jp.add(admin);
+						add(jp, BorderLayout.CENTER);
+						
 						break;
 					case 2:
 						YesNoJPanel YNPanel = new YesNoJPanel();
 						YNPanel = new YesNoJPanel();
+						
+					
+						
 						UIManager.put("OptionPane.cancelButtonText", "Annuler");
 						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
 						result = JOptionPane.showConfirmDialog(null,YNPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
@@ -136,10 +189,26 @@ public class AppSwing extends JFrame {
 							System.out.println(YNPanel.getNameQuestion());
 							((YesNo)qr).setQuestion(YNPanel.getNameQuestion());
 						}
+						
+						jp = new JPanel();
+						gr = new GridLayout(1,3);
+						jp.setLayout(gr);
+						jp.add(client);
+						jp.add(non);
+						jp.add(admin);
+						add(jp, BorderLayout.CENTER);
+						
 						break;
 					case 3:
 						System.out.println("Sondage");
 						qr=new Survey();
+						jp = new JPanel();
+						gr = new GridLayout(1,3);
+						jp.setLayout(gr);
+						jp.add(client);
+						jp.add(non);
+						jp.add(admin);
+						add(jp, BorderLayout.CENTER);
 						break;
 					}
 
@@ -160,7 +229,6 @@ public class AppSwing extends JFrame {
 						UrlReadWrite u = new UrlReadWrite(url);
 						u.registerOnline(qr);
 
-
 						client.getQRCode().setURL(url+"index.php/"+qr.getPath());
 						admin.getQRCode().setURL(url+"index.php/admin/get/"+qr.getPathAdmin());
 
@@ -179,11 +247,15 @@ public class AppSwing extends JFrame {
 								}else{
 									filename = str;
 								}
-								client.setFile(client.getQRCode().createQRCode(filename, "png", Integer.parseInt(imageSize.getText())));
+								
+								
+								
+								
+								client.setFile(client.getQRCode().createQRCode(filename, "png", Integer.parseInt(imageSize.getText()),level));
 								client.updateGraphics();
 
 
-								admin.setFile(admin.getQRCode().createQRCode(filename+ "_admin", "png", Integer.parseInt(imageSize.getText())));
+								admin.setFile(admin.getQRCode().createQRCode(filename+ "_admin", "png", Integer.parseInt(imageSize.getText()), level));
 								admin.updateGraphics();
 
 							} catch (Exception ex) {
@@ -205,6 +277,26 @@ public class AppSwing extends JFrame {
 			}
 		});
 		return creator;
+	}
+
+
+	public JPanel getJp() {
+		return jp;
+	}
+
+
+	public void setJp(JPanel jp) {
+		this.jp = jp;
+	}
+
+
+	public GridLayout getGr() {
+		return gr;
+	}
+
+
+	public void setGr(GridLayout gr) {
+		this.gr = gr;
 	}
 
 }

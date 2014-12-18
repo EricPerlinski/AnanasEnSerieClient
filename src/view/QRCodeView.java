@@ -2,23 +2,23 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
+
 
 import qrcode.SimpleQrcodeGenerator;
 
 public class QRCodeView extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	private SimpleQrcodeGenerator QRCode;
 	
@@ -45,6 +45,7 @@ public class QRCodeView extends JPanel {
 	
 	
 	private void additionJLabel(JPanel principal) {
+		
 		image = new JLabel();
 		image.setBounds(75, 60, 250, 250);
 		principal.add(image);

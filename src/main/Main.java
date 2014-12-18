@@ -1,9 +1,6 @@
 package main;
 
 import helpers.ReadPropertyFile;
-
-import qrcode.SimpleQrcodeGenerator;
-import model.QRCode;
 import urlconnec.UrlReadWrite;
 import view.AppSwing;
 
@@ -30,15 +27,6 @@ public class Main {
 		}
 		
 		new AppSwing();
-		
-		/*System.out.println(u.getWebPage());
-		 */
-		/*Sondage s = new Sondage("titretest");
-		s.parseJson(u.registerOnline(s));
-		System.out.println(s.toString());
-		SimpleQrcodeGenerator qr = new SimpleQrcodeGenerator();
-		qr.createQRCode(s.getTitre(), "png", 400);
-		System.out.println("QR fini !");*/
 		
 		
 	}
