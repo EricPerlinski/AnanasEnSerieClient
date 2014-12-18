@@ -6,3 +6,4 @@ bin
 #journal.org#
 server.properties
 *.png
+uml
