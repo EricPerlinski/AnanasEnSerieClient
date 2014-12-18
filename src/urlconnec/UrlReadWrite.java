@@ -64,6 +64,7 @@ public class UrlReadWrite {
 		StringBuffer res = null;
 		try{
 			System.out.println(url+"index.php"+sondage.getLien());
+			System.out.println();
 			conn = (HttpURLConnection) new URL(url+"index.php"+sondage.getLien()).openConnection();
 			conn.setReadTimeout(10000);
 			conn.setConnectTimeout(15000);
@@ -74,7 +75,7 @@ public class UrlReadWrite {
 			List<NameValuePair> paramHttp = new ArrayList<NameValuePair>();				
 
 			paramHttp.add(new NameValuePair("objet",sondage.toJson()));
-
+			
 			OutputStream os = conn.getOutputStream();
 			BufferedWriter writer = new BufferedWriter(
 					new OutputStreamWriter(os, "UTF-8"));

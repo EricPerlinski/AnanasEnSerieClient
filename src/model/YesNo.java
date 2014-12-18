@@ -5,6 +5,7 @@ public class YesNo extends QRCode{
 	private String question;
 	
 	public YesNo(){
+		this.setLien("/api/admin/add/yesno");
 		question=null;
 	}
 	
