@@ -46,7 +46,6 @@ public class Test {
 		
 		OpenQuestion lq = new OpenQuestion();
 		lq.setQuestion("q1");
-		lq.setResponse("r1");
 		lq.setName("libreQuestion");
 		
 		
