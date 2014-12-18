@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 
+import model.QRCode;
 import model.Survey;
 
 import view.itemsurvey.ButtonQuestionJPanel;
@@ -29,8 +30,11 @@ public class SurveyJPanel extends JPanel{
 	private JButton radio = new JButton("Ajouter des champs RadioButton");
 	private JButton question = new JButton("Ajouter une question");
 	private ArrayList<JPanel> listItem = new ArrayList<JPanel>();
+	
+	private Survey survey;
 
-	public SurveyJPanel(){
+	public SurveyJPanel(QRCode s){
+		this.survey = (Survey)s;
 		list.setLayout(new BoxLayout(list, BoxLayout.Y_AXIS));
 		scrollablePanel.setPreferredSize(new Dimension(500,600));
 		scrollablePanel.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -108,12 +112,11 @@ public class SurveyJPanel extends JPanel{
 		list.repaint();
 	}
 	
-	public Survey getInfos(){
-		Survey s = new Survey();
+	public Survey getSurvey(){
 		for(int i=0; i<listItem.size(); i++){
-			s.addQuestion(((GetInfo)listItem.get(i)).getInfos());
+			survey.addQuestion(((GetInfo)listItem.get(i)).getInfos());
 		}
-		return s;
+		return survey;
 	}
 
 	public static void main(String args[]){
@@ -121,7 +124,7 @@ public class SurveyJPanel extends JPanel{
 		JFrame jf = new JFrame();
 		jf.setTitle("Creating QRCode Service");
 		jf.setMinimumSize(new Dimension(900, 900));
-		jf.setContentPane(new SurveyJPanel());
+		//jf.setContentPane(new SurveyJPanel());
 		jf.setLocationRelativeTo(null);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setVisible(true);

@@ -185,12 +185,13 @@ public class AppSwing extends JFrame {
 						break;
 					case 3:
 						System.out.println("Sondage");
-						SurveyJPanel SPanel = new SurveyJPanel();
+						qr = new Survey();
+						SurveyJPanel SPanel = new SurveyJPanel(qr);
 						UIManager.put("OptionPane.cancelButtonText", "Annuler");
 						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
 						result = JOptionPane.showConfirmDialog(null,SPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
 						if(result == JOptionPane.OK_OPTION){
-							qr = SPanel.getInfos();
+							qr = SPanel.getSurvey();
 						}
 						jp = new JPanel();
 						gr = new GridLayout(1,2);
