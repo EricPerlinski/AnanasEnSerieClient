@@ -76,8 +76,8 @@ public class AppSwing extends JFrame {
 		
 		type.addItem("Like");
 		type.addItem("Redirection");
-		//type.addItem("Oui/Non");
-		//type.addItem("Sondage");
+		type.addItem("Oui/Non");
+		type.addItem("Sondage");
 		
 
 		final JTextField imageSize = new JTextField();
