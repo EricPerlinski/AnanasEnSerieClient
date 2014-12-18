@@ -5,6 +5,11 @@ Ce dépôt concerne le client Java.
 Le dépôt correspondant au serveur est disponnible à l'adresse suivante :
 https://bitbucket.org/telecomnancy/codingweek_prj11-server
 
+
+Fonctionnalités RELEASE_DAY_1 :
+
+- Création d'un QR Code avec la string que l'on veut dedans
+
 Fonctionnalités RELEASE_DAY_2 :
 
 - Créer un QR Code permetant de liker, et d'incrémenter un compteur dans la BDD.
@@ -20,6 +25,13 @@ Fonctionnalités additionnelles de la RELEASE_DAY_3 :
 - Refactoring de l'architecture du logiciel.
 - Ajout d'un test de connection au serveur. 
 - Verifie si le serveur utilise correctement l'API Web.
+
+Fonctionnalités additionnelles de la RELEASE_DAY_4 : 
+
+- Possibilité du choix de la couleur du QR Code.
+- Possibilité de choisir la qualité du QR Code (H, M, Q).
+- Mis à jour de la vue pour un QR Code YES/NO (3 QR Codes dans ce cas là).
+- Possibilité de créer un sondage dynamiquement avec l'ajout d'items (checkbox, radiobutton, question ouverte) que l'on veut.
 
 Fichiers liés :
 
