@@ -12,7 +12,7 @@ public class YesNo extends QRCode{
 	private int nbUnlike;
 	
 	public YesNo(){
-		this.setLien("/api/admin/add/yesno");
+		this.setLien("api/admin/add/yesno");
 		this.nbView = 3;
 		question=null;
 	}
