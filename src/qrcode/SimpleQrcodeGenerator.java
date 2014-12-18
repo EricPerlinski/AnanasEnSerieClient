@@ -6,7 +6,6 @@ import java.awt.RadialGradientPaint;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +23,8 @@ public class SimpleQrcodeGenerator {
 
 	private String url = "";
 
-	public static Color color_1 = null;
-	public static Color color_2 = null;
+	private Color color_1 = null;
+	private Color color_2 = null;
 
 	public File createQRCode(String name, String imageFormat, int size,ErrorCorrectionLevel level){
 
@@ -47,6 +46,8 @@ public class SimpleQrcodeGenerator {
 
 	private ByteMatrix generateMatrix(String data, ErrorCorrectionLevel level) throws WriterException {
 		QRCode qr = new QRCode();
+		System.out.println("data="+data+"/level="+level+"/qr="+qr);
+		System.out.println("C1 = "+color_1+"/C2 = "+color_2);
 		Encoder.encode(data, level, qr);
 		ByteMatrix matrix = qr.getMatrix();
 		return matrix;
@@ -100,7 +101,7 @@ public class SimpleQrcodeGenerator {
 			// Modules noir
 			Color c = new Color(0x000000);
 			g.setPaint(c);
-		}else if(color_1 != null){
+		}else if(color_1 != null && color_2 == null){
 			Color vert = color_1;
 			g.setPaint(vert);
 		}else if(color_1 != null && color_2 != null){
@@ -131,6 +132,22 @@ public class SimpleQrcodeGenerator {
 
 	public String getURL() {
 		return url;
+	}
+	
+	public void setColor_1(Color color_1) {
+		this.color_1 = color_1;
+	}
+	
+	public void setColor_2(Color color_2) {
+		this.color_2 = color_2;
+	}
+	
+	
+	public Color getColor_2() {
+		return color_2;
+	}
+	public Color getColor_1() {
+		return color_1;
 	}
 
 }
