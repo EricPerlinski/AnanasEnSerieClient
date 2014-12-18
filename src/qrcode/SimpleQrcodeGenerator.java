@@ -28,7 +28,6 @@ public class SimpleQrcodeGenerator {
 
 	public File createQRCode(String name, String imageFormat, int size,ErrorCorrectionLevel level){
 
-
 		// encode
 		ByteMatrix byteMatrix = null;
 
@@ -93,25 +92,22 @@ public class SimpleQrcodeGenerator {
 		at.setToScale(ratio, ratio); 
 		a.transform(at);
 
-
-
-
+		
 		BufferedImage im = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D) im.getGraphics();
+		g.setBackground(new Color(0xFFFFFF));
 		if(color_1 == null){
 			// Modules noir
-			Color vert = new Color(0x000000);
-			g.setPaint(vert);
+			Color c = new Color(0x000000);
+			g.setPaint(c);
 		}else if(color_1 != null){
 			Color vert = color_1;
 			g.setPaint(vert);
 		}else if(color_1 != null && color_2 != null){
-			g.setBackground(new Color(0xFFFFFF));
 			// Debut et fin du gradient
 			float[] fractions = { 0.0f, 1.0f }; 
 			Color[] colors = { color_1, color_2 };
 			g.setPaint(new RadialGradientPaint(size / 2, size / 2, size / 2, fractions, colors));
-
 		}
 		// Fond blanc
 		g.clearRect(0, 0, size, size);
