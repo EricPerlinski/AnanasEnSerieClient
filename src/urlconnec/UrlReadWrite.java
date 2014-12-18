@@ -103,18 +103,10 @@ public class UrlReadWrite {
 			e.printStackTrace();
 		}
 		
-		
-		JSONParser parser = new JSONParser();
-		                
 		try{
-			Object obj= parser.parse(res.toString());
-		  	JSONArray array=(JSONArray)obj;
-		  	JSONObject obj2=(JSONObject)array.get(0);
-		  	sondage.setPath(obj2.get("path").toString());
-		  	sondage.setPathAdmin(obj2.get("pathAdmin").toString());
-		}catch(ParseException pe){
-			System.out.println("position: " + pe.getPosition());
-			System.out.println(pe);
+		sondage.parseJSON(res.toString());
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 
 

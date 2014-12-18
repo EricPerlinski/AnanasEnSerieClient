@@ -1,10 +1,12 @@
 package model;
 
+
 public class Like extends QRCode{
 
 	public int nbLike;
 
 	public Like(){
+		this.nbView = 2;
 		this.setLien("/api/admin/add/like");
 		nbLike=0;
 	}
@@ -24,4 +26,6 @@ public class Like extends QRCode{
 		return json.toString();
 	}
 
+
+	
 }

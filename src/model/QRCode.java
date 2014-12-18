@@ -2,16 +2,20 @@ package model;
 
 import java.util.ArrayList;
 
-public class QRCode {
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public abstract class QRCode {
 	
-	private String titre;
-	private int nbView  = 0;
-	private String path;
-	private String pathAdmin;
-	private String lien;
+	protected String titre;
+	protected int nbView  = 0;
+	protected String path;
+	protected String pathAdmin;
+	protected String lien;
 	
 	private ArrayList<Question> questions;
-	
 	
 	public QRCode() {
 		super();
@@ -25,11 +29,21 @@ public class QRCode {
 		questions=new ArrayList<Question>();
 	}
 
-	public void parseJson(String JSON){
+	public void parseJSON(String res){
 		
+		JSONParser parser = new JSONParser();
+    
+		try{
+			Object obj= parser.parse(res.toString());
+		  	JSONArray array=(JSONArray)obj;
+		  	JSONObject obj2=(JSONObject)array.get(0);
+		  	this.setPath(obj2.get("path").toString());
+		  	this.setPathAdmin(obj2.get("pathAdmin").toString());
+		}catch(ParseException pe){
+			System.out.println("position: " + pe.getPosition());
+			System.out.println(pe);
+		}
 	}
-	
-	
 	
 	public QRCode(String newTitre,String newLien){
 		titre = newTitre;

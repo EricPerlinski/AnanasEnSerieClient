@@ -6,12 +6,16 @@ public class Redirect extends QRCode{
 	
 	public Redirect(){
 		url=null;
+		this.nbView=2;
 		this.setLien("/api/admin/add/redirect");
 	}
 	
 	public void setUrl(String u){
 		url=u;
 	}
+	
+	
+	
 	
 	public String toJson(){
 		String jsonSuper = super.toJson();

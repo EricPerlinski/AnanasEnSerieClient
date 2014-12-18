@@ -61,9 +61,6 @@ public class AppSwing extends JFrame {
 		panelButton.add(Box.createGlue());
 		panelButton.add(jb);
 		panelButton.add(Box.createGlue());
-
-		
-		
 				
 		this.add(panelButton, BorderLayout.NORTH);
 		this.setLocationRelativeTo(null);
@@ -145,15 +142,12 @@ public class AppSwing extends JFrame {
 					switch(type.getSelectedIndex()){
 					case 0:
 						qr=new Like();
-						
-						
 						jp = new JPanel();
 						gr = new GridLayout(1,2);
 						jp.setLayout(gr);
 						jp.add(client);
 						jp.add(admin);
 						add(jp, BorderLayout.CENTER);
-						
 						break;
 					case 1:
 						RedirectJPanel RedirectPanel = new RedirectJPanel();
@@ -172,14 +166,10 @@ public class AppSwing extends JFrame {
 						jp.add(client);
 						jp.add(admin);
 						add(jp, BorderLayout.CENTER);
-						
 						break;
 					case 2:
 						YesNoJPanel YNPanel = new YesNoJPanel();
 						YNPanel = new YesNoJPanel();
-						
-					
-						
 						UIManager.put("OptionPane.cancelButtonText", "Annuler");
 						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
 						result = JOptionPane.showConfirmDialog(null,YNPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
@@ -189,7 +179,6 @@ public class AppSwing extends JFrame {
 							System.out.println(YNPanel.getNameQuestion());
 							((YesNo)qr).setQuestion(YNPanel.getNameQuestion());
 						}
-						
 						jp = new JPanel();
 						gr = new GridLayout(1,3);
 						jp.setLayout(gr);
@@ -197,16 +186,14 @@ public class AppSwing extends JFrame {
 						jp.add(non);
 						jp.add(admin);
 						add(jp, BorderLayout.CENTER);
-						
 						break;
 					case 3:
 						System.out.println("Sondage");
 						qr=new Survey();
 						jp = new JPanel();
-						gr = new GridLayout(1,3);
+						gr = new GridLayout(1,2);
 						jp.setLayout(gr);
 						jp.add(client);
-						jp.add(non);
 						jp.add(admin);
 						add(jp, BorderLayout.CENTER);
 						break;
@@ -228,8 +215,12 @@ public class AppSwing extends JFrame {
 						}
 						UrlReadWrite u = new UrlReadWrite(url);
 						u.registerOnline(qr);
-
+						
 						client.getQRCode().setURL(url+"index.php/"+qr.getPath());
+						if(qr.getNbView()==3){
+							non.getQRCode().setURL(url+"index.php/"+((YesNo) qr).getNoLien());
+							System.out.println(url+"index.php/"+((YesNo) qr).getNoLien());
+						}
 						admin.getQRCode().setURL(url+"index.php/admin/get/"+qr.getPathAdmin());
 
 
@@ -253,8 +244,10 @@ public class AppSwing extends JFrame {
 								
 								client.setFile(client.getQRCode().createQRCode(filename, "png", Integer.parseInt(imageSize.getText()),level));
 								client.updateGraphics();
-
-
+								if(qr.getNbView()==3){
+									non.setFile(non.getQRCode().createQRCode(filename+"_non", "png", Integer.parseInt(imageSize.getText()),level));
+									non.updateGraphics();
+								}
 								admin.setFile(admin.getQRCode().createQRCode(filename+ "_admin", "png", Integer.parseInt(imageSize.getText()), level));
 								admin.updateGraphics();
 
