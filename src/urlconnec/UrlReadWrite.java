@@ -116,7 +116,7 @@ public class UrlReadWrite {
 	public boolean testConnection(){
 		StringBuffer res = null;
 		try{
-			conn = (HttpURLConnection) new URL(url+"index.php/api/test").openConnection();
+			conn = (HttpURLConnection) new URL(url+"/api/test").openConnection();
 			conn.setReadTimeout(10000);
 			conn.setConnectTimeout(15000);
 			conn.setRequestMethod("GET");
