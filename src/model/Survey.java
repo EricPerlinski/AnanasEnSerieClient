@@ -7,6 +7,7 @@ public class Survey extends QRCode{
 	private ArrayList<Question> questions;
 	
 	public Survey(){
+		this.nbView = 2;
 		questions=new ArrayList<Question>();
 	}
 	
