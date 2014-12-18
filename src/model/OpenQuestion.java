@@ -3,11 +3,9 @@ package model;
 public class OpenQuestion extends Question{
 
 	private String question;
-	private String response;
 	
 	public OpenQuestion(){
-		question=null;
-		response=null;
+		question= "";
 	}
 	
 	public void setQuestion(String q){
@@ -18,13 +16,7 @@ public class OpenQuestion extends Question{
 		return question;
 	}
 	
-	public void setResponse(String r){
-		response=r;
-	}
-	
-	public String getResponse(){
-		return response;
-	}
+
 	
 	/*public static OpenQuestion jsonToObj(String json){
 		OpenQuestion q = new OpenQuestion();
@@ -48,7 +40,7 @@ public class OpenQuestion extends Question{
 		json.append("{ \"type\" : \"OpenQuestion\" , ");
 		json.append(" \"object\" : {");
 		json.append("\"name\" : \""+this.name+"\" , ");
-		json.append("\"question\" : \""+question+"\" , \"response\" : \""+response+"\"");
+		json.append("\"question\" : \""+question+"\"");
 		json.append("}");
 		json.append("}");
 		return json.toString();
