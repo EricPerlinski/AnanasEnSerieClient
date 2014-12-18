@@ -63,8 +63,8 @@ public class UrlReadWrite {
 	public void registerOnline(QRCode sondage) {
 		StringBuffer res = null;
 		try{
-			System.out.println(url+"index.php"+sondage.getLien());
-			conn = (HttpURLConnection) new URL(url+"index.php"+sondage.getLien()).openConnection();
+			System.out.println(url+sondage.getLien());
+			conn = (HttpURLConnection) new URL(url+sondage.getLien()).openConnection();
 			conn.setReadTimeout(10000);
 			conn.setConnectTimeout(15000);
 			conn.setRequestMethod("POST");

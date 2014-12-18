@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 
-public class RadioButtonQuestion extends Question{
+public class RadioButtonQuestion extends Question {
 
 	private ArrayList<String> items;
 	private int selected;

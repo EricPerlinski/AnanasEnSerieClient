@@ -32,10 +32,6 @@ import urlconnec.UrlReadWrite;
 
 public class AppSwing extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JButton creator;
 	private JPanel jp;
 	private GridLayout gr;
@@ -189,7 +185,13 @@ public class AppSwing extends JFrame {
 						break;
 					case 3:
 						System.out.println("Sondage");
-						qr=new Survey();
+						SurveyJPanel SPanel = new SurveyJPanel();
+						UIManager.put("OptionPane.cancelButtonText", "Annuler");
+						UIManager.put("OptionPane.okButtonText", "Sauvegarder");
+						result = JOptionPane.showConfirmDialog(null,SPanel,"Oui/Non",JOptionPane.OK_CANCEL_OPTION);
+						if(result == JOptionPane.OK_OPTION){
+							qr = SPanel.getInfos();
+						}
 						jp = new JPanel();
 						gr = new GridLayout(1,2);
 						jp.setLayout(gr);
@@ -256,15 +258,7 @@ public class AppSwing extends JFrame {
 							}
 						}
 					}
-					/*
-					client.getQRCode().setURL(url+"index.php/flash/"+s.getPath());
-					client.setFile(client.getQRCode().createQRCode(imageName.getText(), "png", Integer.parseInt(imageSize.getText())));
-					client.updateGraphics();
-
-					admin.getQRCode().setURL(url+"index.php/admin/get/"+s.getPathAdmin());
-					admin.setFile(admin.getQRCode().createQRCode(imageName.getText() + "_admin", "png", Integer.parseInt(imageSize.getText())));
-					admin.updateGraphics();
-					 */
+					
 
 				}
 			}
