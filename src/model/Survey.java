@@ -7,7 +7,7 @@ public class Survey extends QRCode{
 	private ArrayList<Question> questions;
 	
 	public Survey(){
-		this.setLien("admin/add/survey");
+		this.setLien("api/admin/add/survey");
 		this.nbView = 2;
 		questions=new ArrayList<Question>();
 	}
