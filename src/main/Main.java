@@ -1,5 +1,6 @@
 package main;
 
+import javax.swing.JOptionPane;
 import helpers.ReadPropertyFile;
 import urlconnec.UrlReadWrite;
 import view.AppSwing;
@@ -23,6 +24,7 @@ public class Main {
 		
 		UrlReadWrite u = new UrlReadWrite(url);
 		if(!u.testConnection()){
+			JOptionPane.showMessageDialog(null,"Le serveur n'est pas disponible, veuillez\n vérifier l'adresse fournie dans le fichier \n/config/server.properties","Erreur fatale",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
