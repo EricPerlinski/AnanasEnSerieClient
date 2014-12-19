@@ -31,9 +31,7 @@ Fonctionnalités additionnelles de la RELEASE_DAY_4 :
 
 Fonctionnalités additionnelles de la RELEASE_FINAL : 
 
-	- Possibilité de créer QR menant vers un sondage créé dynamiquement avec le nombre d'items (checkbox, radiobutton, question ouverte) que l'on veut.
-
-Fonctionnalités additionnelles de la RELEASE_DAY_4 : 
+- Possibilité de créer QR menant vers un sondage créé dynamiquement avec le nombre d'items (checkbox, radiobutton, question ouverte) que l'on veut.
 
 - Possibilité de créer des QR Codes de type sondage
 
