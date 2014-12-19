@@ -29,7 +29,7 @@ Fonctionnalités additionnelles de la RELEASE_DAY_4 :
 	- Possibilité de créer un QR Code de type "YES/NO" permettant de faire une question avec 2 réponses possibles (Statistique simple sur un événement). Mis à jour de la vue pour un QR Code YES/NO (3 QR Codes dans ce cas là : yes, no, admin pour accéder aux stat directement sans voter).
 
 
-Fonctionnalités additionnelles de la RELEASE_FINALE : 
+Fonctionnalités additionnelles de la RELEASE_FINAL : 
 
 	- Possibilité de créer QR menant vers un sondage créé dynamiquement avec le nombre d'items (checkbox, radiobutton, question ouverte) que l'on veut.
 
