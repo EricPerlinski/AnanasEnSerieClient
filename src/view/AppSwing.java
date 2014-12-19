@@ -5,19 +5,10 @@ import helpers.ReadPropertyFile;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.util.Enumeration;
-import java.util.Iterator;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -30,12 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.UIDefaults;
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.plaf.ColorUIResource;
-
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import model.Like;
 import model.QRCode;
@@ -330,6 +316,7 @@ public class AppSwing extends JFrame {
 						result = JOptionPane.showConfirmDialog(null,SPanel,"Sondage",JOptionPane.OK_CANCEL_OPTION);
 						if(result == JOptionPane.OK_OPTION){
 							qr = SPanel.getSurvey();
+
 							jp = new JPanel();
 							gr = new GridLayout(1,2);
 							jp.setLayout(gr);

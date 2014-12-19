@@ -63,7 +63,7 @@ public class ButtonQuestionJPanel extends JPanel implements GetInfo{
 
 	public void addField(){
 		final JTextField name = new JTextField(10);
-		JLabel nameLabel = new JLabel("Champs : ");
+		JLabel nameLabel = new JLabel("Champ : ");
 		JButton remove = new JButton("X");
 		remove.setBackground(Color.RED);
 
