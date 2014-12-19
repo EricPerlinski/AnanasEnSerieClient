@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Dimension;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,9 +15,8 @@ public class YesNoJPanel  extends JPanel{
 	private JTextField nameField;
 	
 	public YesNoJPanel(){
-		nameLabel = new JLabel("question : ");
-		nameField = new JTextField();
-		nameField.setSize(50, 50);
+		nameLabel = new JLabel("Question : ");
+		nameField = new JTextField(40);
 		this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
 		this.add(nameLabel);
 		this.add(nameField);

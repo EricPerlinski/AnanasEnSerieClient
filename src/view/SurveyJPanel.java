@@ -37,7 +37,7 @@ public class SurveyJPanel extends JPanel{
 	public SurveyJPanel(){
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		list.setLayout(new BoxLayout(list, BoxLayout.Y_AXIS));
-		scrollablePanel.setPreferredSize(new Dimension(500,600));
+		scrollablePanel.setPreferredSize(new Dimension(500,400));
 		scrollablePanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.add(Box.createGlue());
 		this.add(scrollablePanel);
@@ -121,17 +121,6 @@ public class SurveyJPanel extends JPanel{
 			survey.addQuestion(((GetInfo)listItem.get(i)).getInfos());
 		}
 		return survey;
-	}
-
-	public static void main(String args[]){
-		try {UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");}catch (Exception e) {}
-		JFrame jf = new JFrame();
-		jf.setTitle("Creating QRCode Service");
-		jf.setMinimumSize(new Dimension(500, 500));
-		jf.setContentPane(new SurveyJPanel());
-		jf.setLocationRelativeTo(null);
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.setVisible(true);
 	}
 
 }
