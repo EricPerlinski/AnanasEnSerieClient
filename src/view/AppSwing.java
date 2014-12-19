@@ -317,18 +317,18 @@ public class AppSwing extends JFrame {
 						result = JOptionPane.showConfirmDialog(null,SPanel,"Sondage",JOptionPane.OK_CANCEL_OPTION);
 						if(result == JOptionPane.OK_OPTION){
 							qr = SPanel.getSurvey();
-						}else
-						jp = new JPanel();
-						gr = new GridLayout(1,2);
-						jp.setLayout(gr);
-						jp.remove(non);
-						jp.remove(client);
-						jp.remove(admin);
-						jp.add(client);
-						jp.add(admin);
-						add(jp, BorderLayout.CENTER);
-						jp.repaint();
-						jp.revalidate();
+							jp = new JPanel();
+							gr = new GridLayout(1,2);
+							jp.setLayout(gr);
+							jp.remove(non);
+							jp.remove(client);
+							jp.remove(admin);
+							jp.add(client);
+							jp.add(admin);
+							add(jp, BorderLayout.CENTER);
+							jp.repaint();
+							jp.revalidate();
+						}
 						break;
 						
 						default:	qr=new Like();
